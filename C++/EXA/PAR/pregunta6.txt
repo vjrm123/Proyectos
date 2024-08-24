@@ -1,0 +1,7 @@
+1. la sentencia int *const ptr declara un puntero constante = V
+2. arr es un array sizeof(arr) devolvera la cantidad de elemntos del array = F
+3. V es un array la sentencia int *ptr = V hace que el puntero *ptr apunte al primer elemnto = V
+4. ptr 1 y ptr 2 son dos punteros del mismo tipo y ademas ptr2 > ptr1 en la sentencia x = ptr2 - ptr1 ;
+x almacena los elemntos entre ambos punteros = V
+5. b es un array y bptr es un puntero que apunta al primer elemento del array b. para acceder al elemnto b[3] atraves del puntero
+bptr se puede utilisar la expresion *(bptr + 3) = V

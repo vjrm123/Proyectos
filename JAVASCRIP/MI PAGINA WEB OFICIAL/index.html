@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="estilos.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <title>Victor Juan Ramos Mamani</title>
+</head>
+<body>
+    <nav>
+        <div class="contenedor nav-contenedor">
+            <a href="index.html" class="logo">Victor<span> Ramos</span></a>
+            <ul class="lista-navegacion">
+                <li><a href="#inicio">inicio</a></li>
+                <li><a href="#compañeros">Compañeros</a></li>
+                <li><a href="#docentes">Docentes</a></li>
+                <li><a href="#Frases">Frases</a></li>
+                <li><a href="#Lenguajes">Lenguajes</a></li>
+                <li><a href="#Universidad">Universidad</a></li>
+            </ul>
+            <div class="iconos-navegacion">
+                <div id="boton-tema" class="ri-moon-line"></div>
+                <div id="boton-menu" class="ri-menu-line"></div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="inicio" id="inicio">
+        <div class="contenedor inicio-contenedor">
+            <div class="izquierda">
+                <h3>Hola, Soy</h3>
+                <h1><span>Victor Juan</span></h1>
+                <h3>Y Soy un <span class="multiple-text"></span></h3>
+                <p>
+                    apasionado estudiante de "Ciencias de la Computacion" de la <a href="https://ucsp.edu.pe/" target="_blank">UCSP</a>, actualmente cursando el tercer semestre.
+                    Me fascina sumergirme en el mundo de la tecnología y explorar las diversas áreas de esta emocionante disciplina. 
+                    Hasta ahora, he adquirido conocimientos sólidos en programación, estructuras de datos,  
+                    algoritmos y fundamentos de sistemas operativos. Estoy emocionado por continuar mi formación y desarrollar habilidades
+                    que me permitan contribuir al avance de la informática y crear soluciones innovadoras.
+                </p>
+                <div class="contenedor-iconos-sociales">
+                <div class="iconos-sociales">
+                    <a href="#"><i class="ri-instagram-line"></i></a>
+                    <a href="#"><i class="ri-twitter-line"></i></a>
+                    <a href="#"><i class="ri-github-line"></i></a>
+                    <a href="#"><i class="ri-linkedin-line"></i></a>
+                </div>
+                <button class="btn superposicion" id="btn">
+                    <span>Saludame</span>
+                </button>
+                </div>
+            </div>
+            <div class="derecha">
+                <!-- agrega tu foto de inicio o perfil en src desde assets/images/ -->
+                <img src="IMAGENES/tuyo.jpeg" alt="foto perfil de victor juan" />
+            </div>
+        </div>
+    </section>
+
+<hr>
+
+    <section class="universidad">
+        <div class="titulo">
+            <h2>Compañeros y  <span>Docentes</span></h2>
+        </div>
+        <div class="contenedor">
+            <div class="universidad-info">
+                <div class="compañeros-izquierda">
+                    <h2 id="compañeros">Compañeros</h2>
+                    <p>mis compañeros del curso</p>
+                    <a href="javascript:void(1)" class="btns" onclick="mostrarCompañeros()">Ver Compañeros</a>
+                    <div id="compañeros-lista"></div>
+                </div>
+                <div class="profesores-derecha">
+                    <h2 id ="docentes">Docentes</h2>
+                    <p>Mis profesores que imparten las clases en nuestra universidad</p>
+                    <a href="javascript:void(1)" class="btns" onclick="mostrarDocentes()">Ver Docentes</a>
+                    <div id="docentes-lista" ></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="frases" id="Frases">
+        <div class="titulo">
+            <h2>Frases<span> Motivacionales</span></h2>
+        </div>
+        <div class="contenedor-principal">    
+            <div class="frases frases-container scrollbar">
+                <div class="card card-1">
+                    <img src="IMAGENES/moises.webp" alt="">
+                    <div class="info">
+                        <h3>Moisés Kaufman</h3>
+                        <p>La verdadera medida del éxito es cuántas veces nos hemos caído 
+                            y nos hemos levantado... de manera elegante.</p>
+                    </div>
+                </div>
+                
+                <div class="card card-2">
+                    <img src="IMAGENES/martin.jpg" alt="">
+                    <div class="info">
+                        <h3>Martin Fowler</h3>
+                        <p>"Cualquier tonto puede escribir código que una computadora pueda entender. 
+                            Buenos programadores escriben código que los humanos puedan entender."</p>
+                    </div>
+                </div>
+                
+                <div class="card card-3">
+                    <img src="IMAGENES/bill.jpg" alt="">
+                    <div class="info">
+                        <h3>Bill Gates</h3>
+                        <p>"Una vez que empieces a trabajar con esas pequeñas computadoras portátiles, te vuelves adicto a ellas."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

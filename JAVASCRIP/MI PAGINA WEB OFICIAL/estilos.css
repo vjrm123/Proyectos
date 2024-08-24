@@ -1,0 +1,661 @@
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+/* ======================================================
+                    VARIABLES & GENERAL CSS
+========================================================*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  resize: none;
+  outline: none;
+  border: none;
+}
+
+:root {
+  --color-bg: #e1e1e1;
+  --color-text: #212121;
+  --color-tertiary: #3f5dbf;
+
+  --shadow: 6px 6px 12px #bababa, -6px -6px 12px #ffffff;
+  --inner-shadow: inset 6px 6px 12px #bababa, inset -6px -6px 12px #ffffff;
+
+  --width-lg: 80%;
+  --width-sm: 95%;
+  --transition: all 0.4s ease-in;
+}
+
+
+body {
+  font-family: "Great Vibes", cursive;
+  font-family: "Rubik", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+body.active {
+  --color-bg: #212121;
+  --color-text: #e0e0e0;
+  --color-tertiary: #fc1717;
+
+  --shadow: 0.5rem 0.5rem 1rem #111, -6px -6px 12px #333;
+  --inner-shadow: inset 0.5rem 0.5rem 1rem #111, inset -6px -6px 12px #333;
+}
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+::-webkit-scrollbar-track {
+  box-shadow: var(--inner-shadow);
+}
+::-webkit-scrollbar-thumb {
+  box-shadow: var(--shadow);
+  background: var(--color-tertiary);
+}
+img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+a {
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+span,
+p {
+  font-size: 0.9rem;
+}
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+}
+h1 {
+  font-size: 2.8rem;
+}
+h2 {
+  font-size: 2.1rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1.1rem;
+}
+.contenedor {
+  margin: 0 auto;
+  width: var(--width-lg);
+}
+section {
+  padding: 5rem 0 3rem;
+  min-height: 100vh;
+}
+.titulo {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+.titulo h2 {
+  font-size: 2.5rem;
+  display: inline-block;
+  color: var(--color-text);
+  font-weight: 300;
+}
+.titulo h2 span {
+  font-size: 2.5rem;
+  color: var(--color-tertiary);
+  font-weight: 900;
+}
+.btn {
+  padding: 1rem 3rem;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background: transparent;
+  color: var(--color-text);
+  font-weight: 700;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -webkit-border-radius: 0.1rem;
+  -moz-border-radius: 0.1rem;
+  -ms-border-radius: 0.1rem;
+  -o-border-radius: 0.1rem;
+}
+.btn span {
+  z-index: 1;
+  font-weight: 800;
+  letter-spacing: 0.1rem;
+}
+.btn.superposicion::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--color-text);
+  height: 10px;
+  width: 10px;
+  z-index: -1;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  transition: all 0.6s ease-in-out;
+  -webkit-transition: all 0.6s ease-in-out;
+  -moz-transition: all 0.6s ease-in-out;
+  -ms-transition: all 0.6s ease-in-out;
+  -o-transition: all 0.6s ease-in-out;
+  visibility: hidden;
+}
+.btn:hover {
+  color: var(--color-tertiary);
+  box-shadow: var(--inner-shadow);
+}
+
+.scrollbar::-webkit-scrollbar {
+  height: 0.66rem;
+}
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+.scrollbar::-webkit-scrollbar-button {
+  width: 0.8rem;
+}
+
+hr {
+  color: var(--color-tertiary);
+}
+/* ======================================================
+              NAVBAR
+========================================================*/
+nav {
+  padding: 0.3rem 0;
+  transition: 0.3s ease-in-out;
+  position: fixed; /* Agrega esta línea */
+  top: 0; /* Agrega esta línea */
+  left: 0; /* Agrega esta línea */
+  width: 100%; /* Agrega esta línea */
+  background: var(--color-bg); /* Agrega esta línea */
+  z-index: 11111; /* Agrega esta línea */
+  box-shadow: var(--shadow); /* Agrega esta línea */
+}
+nav.scrolling {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--color-bg);
+  z-index: 11111;
+  box-shadow: var(--shadow);
+}
+.nav-contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lista-navegacion {
+  display: flex;
+  gap: 2rem;
+}
+.lista-navegacion li a {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+.lista-navegacion li a:hover {
+  color: var(--color-tertiary);
+}
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  box-shadow: var(--shadow);
+  border-radius: 0.5rem;
+  padding: 0.2rem 2rem;
+  background: transparent;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+.logo span {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-tertiary);
+}
+.logo.logo:hover {
+  color: #666;
+  box-shadow: var(--inner-shadow);
+}
+.iconos-navegacion {
+  display: flex;
+  gap: 2rem;
+}
+.iconos-navegacion div {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  box-shadow: var(--shadow);
+  border-radius: 0.3rem;
+  -webkit-border-radius: 0.3rem;
+  -moz-border-radius: 0.3rem;
+  -ms-border-radius: 0.3rem;
+  -o-border-radius: 0.3rem;
+  cursor: pointer;
+}
+.iconos-navegacion div:hover {
+  color: var(--color-tertiary);
+  box-shadow: var(--inner-shadow);
+}
+#boton-menu {
+  display: none;
+}
+ /* INICIO */
+
+.inicio {
+  width: 100%;
+}
+.inicio-contenedor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 20px;
+}
+.inicio .izquierda {
+  margin-top: 3rem;
+}
+.inicio .izquierda h1 {
+  font-size: 3.3rem;
+  font-weight: 800;
+}
+.inicio .izquierda h1 span {
+  font-size: 3.5rem;
+  color: var(--color-tertiary);
+}
+.inicio .izquierda h3 span {
+  font-size: 1.5rem;
+  color: var(--color-tertiary);
+}
+.inicio .izquierda p {
+  padding: 1.6rem 0;
+}
+.inicio .izquierda .btn {
+  padding: 1rem 3rem;
+}
+.inicio .iconos-sociales {
+  margin-top: 35px;
+  margin-bottom: 40px;
+}
+
+.inicio .iconos-sociales i {
+  height: 5rem;
+  width: 5rem;
+  box-shadow: var(--shadow);
+  background: var(--color-bg);
+  padding: 0.8rem;
+  margin: 0.7rem;
+  font-weight: 800;
+  border-radius: 0.2rem;
+  -webkit-border-radius: 0.2rem;
+  -moz-border-radius: 0.2rem;
+  -ms-border-radius: 0.2rem;
+  -o-border-radius: 0.2rem;
+}
+.inicio .iconos-sociales i:hover {
+  color: var(--color-tertiary);
+  box-shadow: var(--inner-shadow);
+}
+.inicio .derecha {
+  margin: auto;
+}
+.inicio .derecha img {
+  max-width: 35rem;
+  height: auto;
+  box-shadow: var(--shadow);
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+
+hr {
+  color: var(--color-tertiary);
+}
+/* Estilos para la sección de universidad */
+.universidad {
+  padding: 60px 0;
+  background-color: var(--color-bg);
+}
+
+.universidad .titulo h2 {
+  font-weight: 500;
+  margin-top: 50px;
+}
+
+.universidad .contenedor {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  
+}
+
+.universidad-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.compañeros-izquierda, .profesores-derecha {
+  flex: 1;
+  margin: 20px;
+  padding: 20px;
+  background-color: var(--color-bg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  color: var(--color-tertiary);
+  box-shadow: var(--inner-shadow);
+}
+
+
+.compañeros-izquierda h2, .profesores-derecha h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.compañeros-izquierda p, .profesores-derecha p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: 20px;
+}
+
+.btns {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: var(--color-bg);
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  box-shadow: var(--inner-shadow);
+  color: var(--color-tertiary);
+}
+
+.btns:hover {
+  transform: translateY(-5px);
+  border: 1px solid var(--color-tertiary);
+  box-shadow: 0 0 50px var(--color-tertiary);
+}
+
+#compañeros-lista, #docentes-lista {
+  margin-top: 20px;
+  background: var(--color-bg);
+  padding: 20px;
+  border-radius: 8px;
+  display: none; 
+}
+
+/*END SECCTION UNIVERSIDAD*/
+
+/* ======================================================
+              TESTIMONIAL
+========================================================*/
+.frases-container {
+  display: flex;
+  height: 55vh;
+  align-items: flex-start;
+  gap: 1rem;
+  border-radius: 0.4rem;
+  overflow-x: auto;
+  padding: 4rem 1rem 2rem;
+}
+.frases .titulo h2 {
+  font-weight: 500;
+  margin-top: 20px;
+}
+.frases-container .card {
+  position: relative;
+  min-width: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-radius: 0.4rem;
+  padding: 4rem 2rem 2rem;
+  color: var(--color-text);
+  box-shadow: var(--inner-shadow);
+}
+.frases-container img {
+  position: absolute;
+  top: -3rem;
+  width: 6rem;
+  border-radius: 50%;
+  margin: auto;
+  border: 0.3rem solid var(--color-bg);
+  box-shadow: var(--shadow);
+}
+.frases-container h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding-bottom: 0.7rem;
+}
+
+.card.card-1:hover,
+.card.card-2:hover,
+.card.card-3:hover {
+  transform: translateY(-5px);
+  border: 1px solid var(--color-tertiary);
+}
+
+/* Media queries para diseño responsivo */
+
+/*========================================================*/
+@media (max-width: 1050px) {
+  #boton-menu {
+    display: block;
+  }
+  #boton-tema{
+    margin-right: -25px;
+  }
+  .lista-navegacion {
+    flex-direction: column;
+    position: absolute;
+    top: 11rem;
+    right: 0;
+    font-size: 25px;
+    width: var(--width-lg);
+    box-shadow: var(--shadow);
+    background: var(--color-bg);
+    min-width: 300px;
+    height: 30rem;
+    text-align: center;
+    border-radius: 0.2rem;
+    -webkit-border-radius: 0.2rem;
+    -moz-border-radius: 0.2rem;
+    -ms-border-radius: 0.2rem;
+    -o-border-radius: 0.2rem;
+    padding: 2rem 0;
+    z-index: 9999999;
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    -ms-transition: var(--transition);
+    -o-transition: var(--transition);
+  }
+  .lista-navegacion a {
+    font-size: 20px;
+  }
+  .lista-navegacion.active {
+    top: 4rem;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .frases-container .card {
+    min-width: 50%;
+  }
+}
+/* ============= Ipad Pro 11 ====================== */
+@media (max-width: 835px) {
+
+  .derecha {
+    padding-top: 20px;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  h3 {
+    font-size: 1.3rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  section {
+    padding: 3rem 0;
+  }
+  #menu-btn {
+    margin-right: -50px;
+  }
+  .logo {
+    margin-left: -50px;
+  }
+  .inicio-contenedor {
+    grid-template-columns: 1fr;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .inicio .derecha img {
+    max-width: 25rem;
+  }
+  .inicio .izquierda {
+    text-align: center;
+  }
+
+  .frases {
+    height: 100vh;
+  }
+  .frases .titulo h2 {
+    margin-top: 100px;
+  }
+}
+/* ========== Ipad Mini =============== */
+@media (max-width: 769px) {
+  .inicio .derecha img {
+    max-width: 15rem;
+  }
+    .universidad-info {
+      flex-direction: column;
+  }
+
+  .compañeros-izquierda, .profesores-derecha {
+      margin: 10px 0;
+  }
+
+  .frases {
+    flex-direction: column;
+  }
+
+  .card.card-1,
+  .card.card-2,
+  .card.card-3 {
+    margin: 10px 0;
+  }
+}
+
+/* ======================================================
+              RESPONSIVE MOBILE
+========================================================*/
+@media (max-width: 429px) {
+  .logo {
+    margin-left: -30px;
+    font-size: 1rem;
+  }
+  .logo span {
+    font-size: 1rem;
+  }
+  #menu-btn {
+    margin-right: -30px;
+    font-size: 13px;
+  }
+  #theme-btn {
+    font-size: 13px;
+  }
+  .inicio .derecha img {
+    display: block;
+    height: 14rem;
+    max-width: 100%;
+    margin-top: -15px;
+  }
+  .inicio .izquierda {
+    position: relative;
+    margin-top: -20px;
+    z-index: 9999;
+  }
+  .inicio .iconos-sociales {
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
+  .inicio .izquierda h1 {
+    line-height: 2.2rem;
+    margin-bottom: 2px;
+  }
+  .inicio .izquierda h1 span {
+    font-size: 2.1rem;
+  }
+  .inicio .izquierda h3 {
+    font-size: 1.2rem;
+    line-height: 2rem;
+  }
+  .inicio .izquierda p {
+    font-size: 0.7rem;
+  }
+
+  .inicio .iconos-sociales i {
+    height: 5rem;
+    width: 5rem;
+    box-shadow: var(--shadow);
+    background: var(--color-bg);
+    padding: 0.8rem;
+    margin: 0.7rem;
+    font-weight: 800;
+    border-radius: 0.2rem;
+    -webkit-border-radius: 0.2rem;
+    -moz-border-radius: 0.2rem;
+    -ms-border-radius: 0.2rem;
+    -o-border-radius: 0.2rem;
+  }
+
+  .frases .titulo h2 {
+    margin-top: 50px;
+  }
+  .frases-container .card {
+    min-width: 100%;
+  }
+}

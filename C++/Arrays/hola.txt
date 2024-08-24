@@ -1,0 +1,9 @@
+1. Intercambio de elementos de un array
+2. Invertir los elemntos de un array
+3. Buscada binaria  en un array ordenado
+4. suma de elementos del array
+5. Palindromo
+6. eliminar elementos duplicados
+7. Buscar un elemento dentro del array
+8. Contar ocurencias de un elemntos repetido
+9. Eliminar un elemento no deseado.
