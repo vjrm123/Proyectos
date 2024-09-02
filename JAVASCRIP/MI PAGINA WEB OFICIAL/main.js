@@ -3,7 +3,7 @@ const navlist = document.querySelector(".lista-navegacion");
 const menuBtn = document.querySelector(".ri-menu-line");
 
 menuBtn.onclick = function () {
-  navlist.classList.toggle("active");
+  //navlist.classList.toggle("active");
   menuBtn.classList.toggle("ri-arrow-up-double-line");
 };
 

@@ -1,0 +1,1 @@
+/*Entrada principal que redirige a las plantillas*/
