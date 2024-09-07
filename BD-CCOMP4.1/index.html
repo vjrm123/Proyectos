@@ -4,24 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Clinica Privada</title>
 </head>
 <body>
-    <header>
-        <a href="index.html" class="logo">Victor<span> Ramos</span></a>
-        <nav class="lista-navegacion">
-            <a href="#">Inicio</a>
-            <a href="#">Especialidades</a>
-            <a href="#">Agendar</a>
-            <a href="#">Ubicacion</a>
-            <button class="Inicio-secion">Login</button>
-            <div class="iconos-navegacion">
-                <div id="boton-tema" class="ri-moon-line"></div>
-                <div id="boton-menu" class="ri-menu-line"></div>
+    <header class="navbar navbar-expand-lg bg-light fixed-top sombra">
+        <div class="container-fluid">
+            <a href="index.html" class="navbar-brand">
+                <img src="images.jpg" alt="imagen de una especialista" class="logo-img">
+            </a>
+            <!-- Botón de menú hamburguesa que solo se muestra en pantallas pequeñas -->
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#barraNavegacion" aria-controls="barraNavegacion" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Enlaces de navegación -->
+            <div class="collapse navbar-collapse" id="barraNavegacion">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="#" class="nav-link">Inicio</a></li>
+                    
+                    <!-- Menú Desplegable para Especialidades -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownEspecialidades" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Especialidades
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownEspecialidades">
+                            <li><a class="dropdown-item" href="#">Cardiología</a></li>
+                            <li><a class="dropdown-item" href="#">Neurología</a></li>
+                            <li><a class="dropdown-item" href="#">Pediatría</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Otras Especialidades</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item"><a href="#" class="nav-link">Agendar</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Ubicación</a></li>
+                    <li class="nav-item"><button class="btn btn-outline-primary ms-3">Login</button></li>
+                </ul>
+                <div class="d-flex align-items-center ms-3">
+                    <div id="boton-tema" class="ri-moon-line mx-2"></div>
+                    <!-- El botón de menú hamburguesa ya está incluido arriba y se oculta en pantallas grandes -->
+                </div>
             </div>
-        </nav>
+        </div>
     </header>
-    <hr>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
+
+

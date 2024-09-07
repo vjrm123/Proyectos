@@ -1,163 +1,79 @@
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
-/*==========================================================================
-                    VARIABLES GENERALES
-==========================================================================*/
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
-    resize: none;
-    outline: none;
-    border: none;
-  }
-  
-
-  :root {
-    --color-bg: #e1e1e1;
+/* Variables generales */
+:root {
+    --color-fondo: #e1e1e1;
     --color-texto: #212121;
-    --color-terciario: #3271b1;
-  
-    --shadow: 6px 6px 12px #bababa, -6px -6px 12px #ffffff;
-    --interior-shadow: inset 6px 6px 12px #bababa, inset -9px -9px 18px #ffffff;
-    --posterior-shadow: inset 3px 3px 3px #bababa, inset -3px -3px 3px #ffffff;
-  
-    --width-lg: 80%;
-    --width-sm: 95%;
-    --transition: all 0.4s ease-in;
-  }
-  
-  
-  body {
+    --color-acento: #40C4FF;
+    --sombra: 6px 6px 12px #bababa, -6px -6px 12px #ffffff;
+    --sombra-interna: inset 6px 6px 12px #bababa, inset -9px -9px 18px #ffffff;
+    --sombra-posterior: inset 3px 3px 3px #bababa, inset -3px -3px 3px #ffffff;
+}
+
+body {
     font-family: "Great Vibes", cursive;
     font-family: "Rubik", sans-serif;
-    background: var(--color-bg);
-    color: var(--color-text);
+    background: var(--color-fondo);
+    color: var(--color-texto);
     line-height: 1.7;
-    height: 100vh;
-    width: 100%;
-    position: relative;
-  }
-  body.active {
-    --color-bg: #212121;
+    padding-top: 60px;
+}
+
+body.activo {
+    --color-fondo: #212121;
     --color-texto: #e0e0e0;
-    --color-terciario: #fc1717;
-  
-    --shadow: 0.5rem 0.5rem 1rem #111, -6px -6px 12px #333;
-    --interior-shadow: inset 0.5rem 0.5rem 1rem #111, inset -6px -6px 12px #333;
-    --posterior-shadow: inset 3px 3px 3px #111, inset -3px -3px 6px #333;
-  }
-
-  header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 99;
-  }
-  
-  hr {
-    border: none; /* Elimina el estilo predeterminado */
-    border-top: 1px solid var(--color-terciario); /* Ajusta el grosor y color */
-    margin-top: 80px; /* Añade espacio para separarlo del header */
-    width: 100%; /* Ajusta el ancho del hr */
-    margin-left: auto;
-    margin-right: auto;
+    --color-acento: #fc1717;
+    --sombra: 0.5rem 0.5rem 1rem #111, -6px -6px 12px #333;
+    --sombra-interna: inset 0.5rem 0.5rem 1rem #111, inset -6px -6px 12px #333;
+    --sombra-posterior: inset 3px 3px 3px #111, inset -3px -3px 6px #333;
+}
+header {
+  background-color: var(--color-fondo);
+  box-shadow: var(--sombra);
 }
 
-  .logo{
-    font-size: 2em;
-    color: var(--color-texto);
-    user-select: none;
-    margin-right: 10px;
-  }
-
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 20px; 
-  }
-.lista-navegacion {
-    display: flex;
-    align-items: center;
+.logo-img {
+    width: 80px;
+    height: auto;
+    border-radius: 50%;
 }
 
-  .lista-navegacion a{
-    position: relative;
-    font-size: 1.1em;
+.nav-link:hover {
+    color: var(--color-acento);
+}
+
+.btn-outline-primary {
+    border: none;
     color: var(--color-texto);
-    text-decoration: none;
-    font-weight: 500;
-    margin-left: 20px;
-  }
+    background: var(--color-fondo);
+    box-shadow: var(--sombra-interna);
+    transition: 0.5s;
+}
 
-  .lista-navegacion a::after{
-    content: " ";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 100%;
-    height: 3px;
-    background: var(--color-terciario);
-    border-radius: 5px;
-    transform-origin: right;
-    transform: scale(0);
-    transition: transform .5s;
-  }
+.btn-outline-primary:hover {
+    color: var(--color-acento);
+    box-shadow: var(--sombra-posterior);
+    background: var(--color-fondo);
+}
 
-  .lista-navegacion a:hover{
-    color: var(--color-terciario);
-    transform-origin: left;
-    transform: scale(1);
-  }
-
-  .lista-navegacion .Inicio-secion{
-    width: 130px;
-    height: 50px;
-    background: transparent;
-    outline: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1.1em;
-    color: var(--color-texto);
-    font-weight: 400;
-    margin-left: 40px;
-    transition: .5s;
-    box-shadow: var(--interior-shadow);
-  }
-
-.lista-navegacion .Inicio-secion:hover{
-  color: var(--color-terciario);
-  box-shadow: var(--posterior-shadow);
-  transform: rotate(-10deg);
-} 
-  .iconos-navegacion {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-  }
-  .iconos-navegacion div {
+#boton-tema, #boton-menu {
     padding: 0.5rem 1rem;
-    margin: 0.5rem;
     color: var(--color-texto);
-    background: var(--color-bg);
-    box-shadow: var(--interior-shadow);
+    background: var(--color-fondo);
+    box-shadow: var(--sombra-interna);
     border-radius: 0.3rem;
     cursor: pointer;
     transition: all 0.2s ease-in;
-  }
-  .iconos-navegacion div:hover {
-    color: var(--color-terciario);
-    box-shadow: var(--posterior-shadow);
-    transform: rotate(-90deg);
-  }
-  #boton-menu {
-    display: none;
-  }
+}
+
+#boton-tema:hover, #boton-menu:hover {
+    color: var(--color-acento);
+    box-shadow: var(--sombra-posterior);
+}
+/*     desplegabvle*/
+.dropdown-menu li a:hover{
+    background-color: var(--color-fondo);
+    box-shadow: var(--sombra-posterior);
+    transition: 0.5s;
+
+}
