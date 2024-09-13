@@ -1,46 +1,120 @@
-#include<iostream>
+#include <iostream>
 
 template<class T>
-struct Nodo{
+struct Nodo {
     T valor;
     Nodo<T>* next;
-    Nodo(T v, Nodo<T>* N = nullptr) : (valor)v, next(N){}
+    Nodo(T v, Nodo<T>* N = nullptr) : valor(v), next(N) {}
 };
 
 template<class T, class O>
-struct Lista_E{
+struct LE {
     Nodo<T>* Head = nullptr;
 
     void ADD(T v);
-    void DEL(T v);
+    void Del(T v);
     bool Find(T v, Nodo<T>*& pos);
     void Print();
-    ~Lista_E();
+    ~LE(); 
 };
 
 template<class T>
-class ASC{
-    public:
-        inline bool operator()(T a, T b) { return a > b; }
+class Asc {
+public:
+    inline bool operator()(T a, T b) { return a < b; }
 };
 
 template<class T>
-class DES{
-    public:
-        inline bool operator()(T a, T b) { return a < b; }
+class Dsc {
+public:
+    inline bool operator()(T a, T b) { return a > b; }
 };
 
 template<class T, class O>
-void Lista_E<T, O>::Print(){
-    std::cout<<"Head-> ";
-    while(Head){
-        std::cout<<Head->valor<<" ";
-        Head = Head->next;
+void LE<T, O>::ADD(T v) {
+    Nodo<T>* nuevo = new Nodo<T>(v);
+    Nodo<T>* pos = nullptr;
+
+    if (!Find(v, pos)) {
+        if (!pos) {
+            nuevo->next = Head;
+            Head = nuevo;
+        }
+        else {
+            nuevo->next = pos->next;
+            pos->next = nuevo;
+        }
     }
-    std::cout<<"Null\n";
 }
 
 template<class T, class O>
-void Lista_E<T, O>::ADD(T valor){
+bool LE<T, O>::Find(T v, Nodo<T>*& pos) {
+    Nodo<T>* actual = Head;
+    Nodo<T>* previo = nullptr;
+    O comparar;
+
+    while (actual && comparar(actual->valor, v)) {
+        previo = actual;
+        actual = actual->next;
+    }
+    pos = previo;
+    return actual && actual->valor == v;
+}
+
+template<class T, class O>
+void LE<T, O>::Del(T v) {
+    Nodo<T>* pos = nullptr;
+    if (Find(v, pos)) {
+        Nodo<T>* toDelete = nullptr;
+        if (!pos) {
+            toDelete = Head;
+            Head = Head->next;
+        }
+        else {
+            toDelete = pos->next;
+            pos->next = toDelete->next;
+        }
+        delete toDelete;
+    }
+}
+
+template<class T, class O>
+void LE<T, O>::Print() {
+    Nodo<T>* actual = Head;
+    std::cout << "Head -> ";
+    while (actual) {
+        std::cout << actual->valor << " -> ";
+        actual = actual->next;
+    }
+    std::cout << "Null\n";
+}
+
+template<class T, class O>
+LE<T, O>::~LE() {
+    while (Head) {
+        Nodo<T>* temp = Head;
+        Head = Head->next;
+        delete temp;
+    }
+}
+
+int main() {
+    LE<int, Asc<int>> listaAsc;
+    listaAsc.ADD(0);
+    listaAsc.ADD(3);
+    listaAsc.ADD(1);
+    listaAsc.ADD(2);
+    listaAsc.ADD(2);
     
+    listaAsc.Print();
+
+    LE<int, Dsc<int>> listaDsc;
+    listaDsc.ADD(3);
+    listaDsc.ADD(1);
+    listaDsc.ADD(7);
+    listaDsc.ADD(2);
+
+    listaDsc.Print();
+
+    return 0;
 }
