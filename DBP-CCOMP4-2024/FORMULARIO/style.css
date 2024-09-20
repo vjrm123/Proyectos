@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    list-style: none;
+}
+
+/*-------------------------------------*/
+/*          VARIABLES                   */
+/*-------------------------------------*/
+
+:root{
+    --sombra-despues: inset 5px 5px 5px #bababa, inset -5px -5px 5px #ffffff;
+    --color-principal: #15a5e7;
+    --color-formulario: #e1e1e1;
+    --blanco-alpha-25: rgba(255,255,255,0.25);
+    --sombra: 2px 2px 5px rgba(0,0,0,0.40);
+}
+
+/*-------------------------------------*/
+/*       estilo global                  */
+/*-------------------------------------*/
+
+body {
+    background: var(--color-formulario);
+}
+
+
+.btn{
+    box-shadow: var(--sombra-despues);
+    color: var(--color-principal);
+    padding: .8rem 2rem;
+    border-radius: 1.5rem;
+    font-size: 12px;
+    cursor: pointer;
+    position: relative;
+    font-weight: bold;
+}
+.btn:hover{
+    color: #fc1717;
+}
+.form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 4% 0;
+    position: relative;
+}
+.form-container form{
+    background-color: var(--color-formulario);
+    box-shadow: var(--sombra-despues);
+    border-radius: 3rem;
+    padding: 1rem;
+}
+.form-container form .flex{
+    display: flex;
+    gap: 1rem;
+}
+.form-container form .flex .col{
+    flex: 1 1 15rem;
+}
+.form-container .register{
+    width: 45rem;
+}
+.form-container form h3{
+    text-align: center;
+    font-size: 2rem;
+    color: var(--color-principal);
+    text-transform: capitalize;
+    font-weight: bolder;
+}
+.form-container form p{
+    padding-top: 1rem;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    color: var(--color-principal);
+}
+.form-container form p span{
+    color: red;
+}
+.form-container form .link{
+    padding-bottom: 1rem;
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+.form-container form .link a{
+    color: var(--color-principal);
+}
+.form-container form .box{
+    background-color: var(--blanco-alpha-25);
+    box-shadow: var(--sombra);
+    width: 100%;
+    border-radius: 5rem;
+    margin: .5rem 0;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+.form-container form textarea{
+    height: 3rem;
+    resize: none;
+}
+.form-container form select{
+    height: 3rem;
+    resize: none;
+    display: block; 
+    margin: 10px auto;
+    width: calc(100% - 2rem);
+}
+.form-container form .btn{
+    display: block; 
+    margin: 20px auto;
+    width: 25%;
+    font-size: 1.2rem;
+}
+

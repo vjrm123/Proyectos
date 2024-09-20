@@ -1,0 +1,54 @@
+:root{
+    --sombra-despues: inset 5px 5px 5px #bababa, inset -5px -5px 5px #ffffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #e1e1e1;
+}
+.cv-container {
+    top: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: var(--sombra-despues);
+    padding: 20px;
+    width: 200mm; 
+    max-width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+.cv-container h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+.cv-container p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+.cv-container .section {
+    margin-bottom: 20px;
+}
+.cv-container .section h2 {
+    font-size: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.cv-container strong {
+    display: inline-block;
+    width: 180px;
+    font-weight: bold;
+}
+.cv-container .profile-text {
+    white-space: pre-wrap; 
+}
