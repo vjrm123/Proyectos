@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV</title>
+    <link rel="stylesheet" type="text/CSS" href="CSS/style.css">
+</head>
+<body>
+    
+<div class="form-container">
+    <form action="mostrar_cv.php" method="post"  class="register">
+        <h3>Ingresa tus datos</h3>
+        <div class="flex">
+            <div class="col">
+                
+                <div class="input-field">
+                    <p><strong>Nombre y Apellidos</strong> <span>*</span></p>
+                    <input type="text" name="nombre" placeholder="Ingresa tu nombre completo" maxlength="50" required class="box">
+                </div>
+                
+                <div class="input-field">
+                    <p><strong>Fecha de Nacimiento</strong> <span>*</span></p>
+                    <input type="date" name="fecha_nacimiento"  required class="box">
+                </div>
+                
+                <div class="input-field">
+                    <p><strong>Ocupación</strong> <span>*</span></p>
+                    <input type="text" name="ocupacion" placeholder="Ingresa tu ocupación" maxlength="50" required class="box">
+                </div>
+                
+                <div class="input-field">
+                    <p><strong>Contacto (Teléfono, Email) </strong><span>*</span></p>
+                    <input type="text" name="contacto" placeholder="Ingresa tu teléfono o email" maxlength="50" required class="box">
+                </div>
+            </div>
+            <div class="col">
+                
+                <div class="input-field">
+                    <p><strong>Nacionalidad </strong><span>*</span></p>
+                    <select name="nacionalidad" required class="box">
+                        <option value="" disabled selected>Selecciona tu nacionalidad</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Brasil">Brasil</option>
+                        <option value="Chile">Chile</option>
+                        <option value="México">México</option>
+                        <option value="peru">Peru</option>
+                    </select>
+                </div>
+
+                <div class="input-field">
+                    <p><strong>Nivel de Inglés </strong><span>*</span></p>
+                    <input type="radio" name="nivel_ingles" value="básico" required> Básico
+                    <input type="radio" name="nivel_ingles" value="intermedio"> Intermedio
+                    <input type="radio" name="nivel_ingles" value="avanzado"> Avanzado
+                    <input type="radio" name="nivel_ingles" value="fluido"> Fluido
+                </div>
+                
+                <div class="input-field">
+                    <p><strong>Lenguajes de Programación</strong> <span>*</span></p>
+                    <select name="lenguajes[]" multiple required class="box">
+                        <option value="php">PHP</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">C++</option>
+                        <option value="python">Java</option>
+                        <option value="python">Python</option>
+                    </select>
+                </div>
+                
+                
+                <div class="input-field">
+                    <p><strong>Aptitudes</strong> <span>*</span></p>
+                    <input list="aptitudes" name="aptitudes" placeholder="Selecciona o ingresa una aptitud" required class="box">
+                    <datalist id="aptitudes">
+                        <option value="Trabajo en equipo">
+                        <option value="Resolución de problemas">
+                        <option value="Liderazgo">
+                        <option value="Comunicación efectiva">
+                    </datalist>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-field">
+            <p><strong>Habilidades</strong> <span>*</span></p>
+            <input type="checkbox" name="habilidades[]" value="HTML"> HTML
+            <input type="checkbox" name="habilidades[]" value="CSS"> CSS
+            <input type="checkbox" name="habilidades[]" value="JavaScript"> JavaScript
+            <input type="checkbox" name="habilidades[]" value="SQL"> SQL
+        </div>
+        
+        <div class="input-field">
+            <p><strong>Perfil</strong> <span>*</span></p>
+            <textarea name="perfil" rows="4" placeholder="Describe tu perfil aqui..." required class="box"></textarea>
+        </div>
+        
+        <input type="submit" name="submit" value="Enviar" class="btn">
+    </form>
+</div>
+</body>
+</html>
