@@ -142,12 +142,18 @@ void LE<T, O>::Print() {
             std::cout << actual->valor[i];
             if (i < actual->size - 1) std::cout << ",";
         }
+        for (int i = actual->size; i < 5; ++i) {
+            if (actual->size > 0) std::cout << ",";  
+            std::cout << "-";
+        }
         std::cout << "]";
-        if (actual->siguiente) std::cout << "->";
+
+        if (actual->siguiente) std::cout << " -> ";
         actual = actual->siguiente;
     }
     std::cout << "\n";
 }
+
 
 template<class T, class O>
 LE<T, O>::~LE() {
