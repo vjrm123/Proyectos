@@ -3,6 +3,8 @@
 template<class T>
 struct Nodo {
     T valor;
+    T valor[5];
+    T *top;
     Nodo<T>* next;
     Nodo(T v, Nodo<T>* N = nullptr) : valor(v), next(N) {}
 };
