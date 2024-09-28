@@ -1,194 +1,187 @@
+
 #include <iostream>
 
-template<class T>
-struct Nodo {
-    T valor[5];
-    T* top;
-    int size;
-    Nodo<T>* siguiente;
-
-    Nodo(Nodo<T>* N = nullptr) : siguiente(N), size(0) {
-        top = valor;
+template<typename T>
+struct nodo {
+    T* arr;
+    int tamanio = 5;
+    nodo* next;
+    nodo(T v = 0, nodo* n = nullptr) {
+        arr = new T[tamanio];
+        *arr = v;
+        next = n;
+    };
+    ~nodo() {
+        delete[] arr;
     }
 };
 
-template<class T, class O>
-struct LE {
-    Nodo<T>* head = nullptr;
-
-    void ADD(T v);
-    void Del(T v);
-    bool Find(T v);
-    void Print();
+template<typename T>
+class LE {
+private:
+    nodo<T>* inicio = nullptr;
+    nodo<T>* fin = nullptr;
+    T* dato_inicio = nullptr;
+    T* dato_fin = nullptr;
+public:
+    LE() : inicio(nullptr), fin(nullptr), dato_inicio(nullptr), dato_fin(nullptr) {}
+    bool find(T v, nodo<T>*& p, nodo<T>*& p_ant, T*& q);
+    bool add(T v);
+    bool del(T v);
+    void print();
     ~LE();
 };
 
-template<class T>
-class Asc {
-public:
-    bool operator()(T a, T b) {
-        return a < b;
+template<typename T>
+bool LE<T>::find(T v, nodo<T>*& p, nodo<T>*& p_ant, T*& q) {
+    if (!inicio) { return false; }
+    p = inicio;
+    p_ant = inicio;
+
+    while (p->next && (*p->next->arr <= v || v > *(p->arr + p->tamanio - 1) && v < *(p->next->arr))) {
+        p_ant = p;
+        p = p->next;
     }
-};
 
-template<class T>
-class Dsc {
-public:
-    bool operator()(T a, T b) {
-        return a > b;
+    if (p == fin && dato_fin == fin->arr + fin->tamanio - 1 && *dato_fin < v) {
+        p_ant = p;
+        p = p->next;
+        return false;
     }
-};
 
-template<class T, class O>
-void LE<T, O>::ADD(T v) {
-    O comparar;
-    Nodo<T>* actual = head;
-    Nodo<T>* anterior = nullptr;
+    for (q = p->arr; *q < v && (p != fin || (p == fin && q <= dato_fin)); q++);
+    return (q <= dato_fin) && (*q == v);
+}
 
-    if (!head) {
-        head = new Nodo<T>();
-        head->valor[0] = v;
-        head->size = 1;
-        head->top = &head->valor[0];
+template<typename T>
+bool LE<T>::add(T v) {
+    T* dato;
+    nodo<T>* p;
+    nodo<T>* p_ant;
+    if (find(v, p, p_ant, dato)) return false;
+    if (!inicio) {
+        nodo<T>* nuevo = new nodo<T>(v);
+        inicio = fin = nuevo;
+        dato_inicio = dato_fin = inicio->arr;
+        return true;
+    };
+    if (dato_fin == fin->arr + fin->tamanio - 1) {
+        nodo<T>* nuevo = new nodo<T>();
+        fin->next = nuevo;
+        fin = nuevo;
+        dato_fin = fin->arr;
+    }
+    else { dato_fin++; }
+    if (!p) { p = fin; dato = p->arr; }
+    T temp = 0;
+    while (dato != dato_fin) {
+        temp = *dato;
+        *dato = v;
+        v = temp;
+        if (dato == p->arr + p->tamanio - 1) {
+            p = p->next;
+            dato = p->arr;
+        }
+        else { dato++; }
+    }
+    *dato_fin = v;
+    return true;
+}
+
+template<typename T>
+bool LE<T>::del(T v) {
+    T* dato;
+    nodo<T>* p;
+    nodo<T>* p_ant;
+    if (!find(v, p, p_ant, dato)) return false;
+    if (dato_fin == dato_inicio) {
+        delete p;
+        inicio = fin = nullptr;
+        dato_inicio = dato_fin = nullptr;
+        return true;
+    }
+    while (dato != dato_fin) {
+        if (dato == p->arr + p->tamanio - 1) {
+            *dato = *(p->next->arr);
+            dato = p->next->arr;
+            p_ant = p;
+            p = p->next;
+        }
+        else { *dato = *(dato + 1); dato++; }
+    }
+    if (dato_fin == fin->arr) {
+        delete fin;
+        fin = p_ant;
+        fin->next = nullptr;
+        dato_fin = fin->arr + fin->tamanio - 1;
+    }
+    else { dato_fin--; }
+    return true;
+}
+
+template<typename T>
+void LE<T>::print() {
+    if (!inicio) {
+        std::cout << "[]";
         return;
     }
-
-    while (actual) {
-        for (int i = 0; i < actual->size; ++i) {
-            if (!comparar(actual->valor[i], v) && !comparar(v, actual->valor[i])) {
-                return;
-            }
+    nodo<T>* p = inicio;
+    T* end = inicio->arr + inicio->tamanio - 1;
+    for (T* p_data = dato_inicio; p;) {
+        if (p_data == p->arr) {
+            std::cout << "[";
         }
-        if (actual->size < 5) {
-            int pos = actual->size;
-            for (int i = 0; i < actual->size; ++i) {
-                if (comparar(v, actual->valor[i])) {
-                    pos = i;
-                    break;
-                }
-            }
-            for (int j = actual->size; j > pos; --j) {
-                actual->valor[j] = actual->valor[j - 1];
-            }
-            actual->valor[pos] = v;
-            actual->size++;
-            actual->top = &actual->valor[actual->size - 1];
-            return;
-        }
-
-        anterior = actual;
-        actual = actual->siguiente;
-    }
-    Nodo<T>* nuevoNodo = new Nodo<T>();
-    nuevoNodo->valor[0] = v;
-    nuevoNodo->size = 1;
-    nuevoNodo->top = &nuevoNodo->valor[0];
-    anterior->siguiente = nuevoNodo;
-}
-
-template<class T, class O>
-bool LE<T, O>::Find(T v) {
-    Nodo<T>* actual = head;
-    O comparar;
-
-    while (actual) {
-        for (int i = 0; i < actual->size; ++i) {
-            if (!comparar(actual->valor[i], v) && !comparar(v, actual->valor[i])) {
-                return true;
-            }
-        }
-        actual = actual->siguiente;
-    }
-    return false;
-}
-
-template<class T, class O>
-void LE<T, O>::Del(T v) {
-    Nodo<T>* actual = head;
-    Nodo<T>* previo = nullptr;
-    O comparar;
-
-    while (actual) {
-        for (int i = 0; i < actual->size; ++i) {
-            if (!comparar(actual->valor[i], v) && !comparar(v, actual->valor[i])) {
-                for (int j = i; j < actual->size - 1; ++j) {
-                    actual->valor[j] = actual->valor[j + 1];
-                }
-                actual->size--;
-
-                if (actual->size == 0) {
-                    if (!previo) {
-                        head = actual->siguiente;
-                    }
-                    else {
-                        previo->siguiente = actual->siguiente;
-                    }
-                    delete actual;
-                }
-                return;
-            }
-        }
-        previo = actual;
-        actual = actual->siguiente;
-    }
-}
-
-template<class T, class O>
-void LE<T, O>::Print() {
-    Nodo<T>* actual = head;
-    while (actual) {
-        std::cout << "[";
-        for (int i = 0; i < actual->size; ++i) {
-            std::cout << actual->valor[i];
-            if (i < actual->size - 1) std::cout << ",";
-        }
-        for (int i = actual->size; i < 5; ++i) {
-            if (actual->size > 0) std::cout << ",";  
+        if (p == fin && p_data > dato_fin) {
             std::cout << "-";
         }
-        std::cout << "]";
-
-        if (actual->siguiente) std::cout << " -> ";
-        actual = actual->siguiente;
+        else {
+            std::cout << *p_data;
+        }
+        if (p_data == end) {
+            std::cout << "]";
+            p = p->next;
+            if (p) {
+                end = p->arr + p->tamanio - 1;
+                p_data = p->arr;
+                std::cout << " -> ";
+            }
+            continue;
+        }
+        else {
+            std::cout << ", ";
+        }
+        p_data++;
     }
-    std::cout << "\n";
 }
 
-
-template<class T, class O>
-LE<T, O>::~LE() {
-    while (head) {
-        Nodo<T>* temp = head;
-        head = head->siguiente;
-        delete temp;
+template<typename T>
+LE<T>::~LE() {
+    nodo<T>* p = inicio;
+    while (inicio) {
+        inicio = inicio->next;
+        delete p;
+        p = inicio;
     }
 }
 
 int main() {
-    LE<int, Asc<int>> listaAsc;
-    listaAsc.ADD(10);
-    listaAsc.ADD(2);
-    listaAsc.ADD(3);
-    listaAsc.ADD(4);
-    listaAsc.ADD(5);
-    listaAsc.Print();
+    LE<int> lista;  
 
-    listaAsc.Del(5);
-    listaAsc.Del(4);
+    lista.add(24);
+    lista.add(50);
+    lista.add(46);
+    lista.add(12);
+    lista.add(23);
+    lista.add(123);
+    lista.add(235);
 
-    listaAsc.ADD(1);
-    listaAsc.ADD(6);
-    listaAsc.ADD(23);
-    listaAsc.ADD(21);
-    listaAsc.Print();
+    lista.print();
+    std::cout << "\n";
 
-    LE<int, Dsc<int>> listaDsc;
-    listaDsc.ADD(6);
-    listaDsc.ADD(8);
-    listaDsc.ADD(7);
-    listaDsc.Print();
+    lista.del(23);
+    lista.del(12);
 
-    return 0;
+    std::cout << "Despues de borrar:\n";
+    lista.print();
+    std::cout << "\n";
 }
-
-
