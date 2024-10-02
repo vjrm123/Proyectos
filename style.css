@@ -1,38 +1,52 @@
-/* From Uiverse.io by CYBWEBALI */ 
-.btn {
-    display: grid;
-    place-items: center;
-    background: #e3edf7;
-    padding: 1.4em;
-    border-radius: 10px;
-    box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
-            -6px -6px 10px -1px rgba(255,255,255,0.7);
-    border: 1px solid rgba(0,0,0,0);
-    cursor: pointer;
-    transition: transform 0.5s;
-  }
-  
-  .btn:hover {
-    box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),
-            inset -4px -4px 6px -1px rgba(255,255,255,0.7),
-            -0.5px -0.5px 0px rgba(255,255,255,1),
-            0.5px 0.5px 0px rgba(0,0,0,0.15),
-            0px 12px 10px -10px rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.1);
-    transform: translateY(0.5em);
-  }
-  
-  .btn svg {
-    transition: transform 0.5s;
-  }
-  
-  .btn:hover svg {
-    transform: scale(0.9);
-    fill: #333333;
-  }
-  
-  
+/* From Uiverse.io by JhaveLang */ 
+/* This is an example, feel free to delete this code */
+.tooltip-container {
+  --background: linear-gradient(45deg, #22d3ee, #1f9df5);
+  position: relative;
+  background: var(--background);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 17px;
+  padding: 0.7em 1.8em;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
 
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  transform-origin: bottom;
+  padding: 0.3em 0.6em;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  background: var(--background);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 10%;
+}
 
+.tooltip::before {
+  position: absolute;
+  content: "";
+  height: 0.6em;
+  width: 0.6em;
+  bottom: -0.2em;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  background: var(--background);
+}
 
-
+.tooltip-container:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-10%) scale(1);
+}
+.tooltip-container:hover {
+  transform: scale(0.9);
+}

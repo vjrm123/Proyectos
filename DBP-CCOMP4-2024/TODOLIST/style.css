@@ -1,0 +1,137 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --white: #fafafb;
+    --purple: #9a67ea;
+    --blue-light: #04d4c3;
+    --blue-dark: #2a73c2;
+    --green: #2c7b90;
+    --sombra-antes: inset 0 0.0625em 0 0 #f4f4f4, 0 0.0625em 0 0 #efefef,
+    0 0.125em 0 0 #ececec, 0 0.25em 0 0 #e0e0e0, 
+    0 0.3125em 0 0 #dedede, 0 0.375em 0 0 #dcdcdc, 
+    0 0.425em 0 0 #cacaca, 0 0.425em 0.5em 0 #cecece;
+    --sombra-active: inset 0 0.03em 0 0 #f4f4f4, 0 0.03em 0 0 #efefef, 
+        0 0.0625em 0 0 #ececec, 0 0.125em 0 0 #e0e0e0, 
+        0 0.125em 0 0 #dedede, 0 0.2em 0 0 #dcdcdc, 
+        0 0.225em 0 0 #cacaca, 0 0.225em 0.375em 0 #cecece;
+}
+
+body {
+    background: linear-gradient(to bottom, var(--purple), var(--blue-light));
+    height: 100vh;
+}
+
+.container{
+    max-width: 80%;
+    width: 500px;
+    height: 600px;
+    margin: 0 auto;
+    border: 1px solid #ffffff; 
+    border-radius: 15px;
+    padding: 5px 40px 40px; 
+}
+
+.perfil h1{
+    color: var(--white);
+}
+.perfil span {
+    color: var(--white);
+    letter-spacing: 1px;
+}
+#fecha{
+    color: var(--white);
+    padding: 50px 0 5px 0;
+}
+
+.agregar-tarea{
+    background-color: var(--white);
+    border-radius: 15px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    gap: 50px; 
+    margin: 40px 0;
+}
+.agregar-tarea input{
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    border: none;
+    font-size: 1.1rem;
+    background-color: var(--white);
+    color: var(--purple);
+}
+
+.agregar-tarea i{
+    font-size: 50px;
+    color: var(--purple);
+}
+.agregar-tarea i:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.agregar-tarea input::placeholder{
+    font-size: 1.1rem;
+    color: var(--purple);
+}
+
+.seccion-tarea h3{
+    color: var(--white);
+    margin-bottom: 20px;
+}
+.seccion-tarea li{
+    display: flex;
+    background: linear-gradient(to bottom, var(--blue-dark), var(--green)); /* Corregido botton a bottom */
+    border-radius: 15px;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+    color: var(--white);
+}
+.seccion-tarea i{
+    font-size: 25px;
+}
+.seccion-tarea i:hover{
+    color: var(--blue-light);
+    cursor: pointer;
+}
+.seccion-tarea > ul p{
+    font-size: 1.2rem;
+}
+
+.line-through{
+    text-decoration: line-through;
+    color: var(--blue-light);
+}
+
+.botones {
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 20px; 
+}
+
+
+.botones button {
+    background-color: var(--blue-light);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.5s, box-shadow 0.5s;
+    box-shadow: var(--sombra-antes);
+}
+
+.botones button:active {
+    background-color: var(--purple);
+    box-shadow: var(--sombra-active);
+    translate: 0 0.225em;
+}

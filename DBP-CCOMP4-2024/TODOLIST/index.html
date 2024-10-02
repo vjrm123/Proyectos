@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>todolist</title>
+</head>
+<body>
+    <div class="container">
+        <div class="perfil">
+            <div id="fecha">1 de enero</div>
+            <h1>hola, victor juan</h1>
+            <span>vamos a cumplir tus metas</span>
+        </div>
+        <div class="agregar-tarea">
+            <input type="text" id="input" placeholder="  ingresa una tarea">
+            <i id="enter" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="seccion-tarea">
+            <h3>estas son tus tareas</h3>
+            <ul id="lista">
+                <li>
+                    <i class="far fa-circle co" data="realizado" id="0"></i>
+                    <p class="text">hacer la tarea en español</p>
+                    <i class="fas fa-edit editar" data="editar" id="0"></i> 
+                    <i class="fas fa-trash de" data="eliminado" id="0"></i>
+                </li>
+            </ul>
+        </div>
+        <div class="botones">
+            <button id="seleccionar-todo">Seleccionar Todo</button>
+            <button id="borrar-todo">Borrar Todo</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

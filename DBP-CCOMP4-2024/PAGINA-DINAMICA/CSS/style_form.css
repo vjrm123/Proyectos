@@ -1,0 +1,194 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    list-style: none;
+}
+
+/*-------------------------------------*/
+/*          VARIABLES                   */
+/*-------------------------------------*/
+
+:root{
+    --sombra-despues: inset 5px 5px 5px #bababa, inset -5px -5px 5px #ffffff;
+    --sombra-antes: inset 0 0.0625em 0 0 #f4f4f4, 0 0.0625em 0 0 #efefef,
+    0 0.125em 0 0 #ececec, 0 0.25em 0 0 #e0e0e0, 0 0.3125em 0 0 #dedede,
+    0 0.375em 0 0 #dcdcdc, 0 0.425em 0 0 #cacaca, 0 0.425em 0.5em 0 #cecece;
+    --sombra-active: inset 0 0.03em 0 0 #f4f4f4, 0 0.03em 0 0 #efefef, 
+    0 0.0625em 0 0 #ececec, 0 0.125em 0 0 #e0e0e0, 0 0.125em 0 0 #dedede,
+    0 0.2em 0 0 #dcdcdc, 0 0.225em 0 0 #cacaca, 0 0.225em 0.375em 0 #cecece;
+    --color-principal: #15a5e7;
+    --color-formulario: #f0f0f0;
+    --color-fondo: #f0f0f0;
+    --blanco-alpha-25: rgba(255,255,255,0.25);
+    --sombra: 2px 2px 5px rgba(0,0,0,0.40);
+}
+
+/*-------------------------------------*/
+/*       estilo global                  */
+/*-------------------------------------*/
+
+body {
+    background: var(--color-fondo);
+}
+
+
+.btn{
+    font: inherit;
+    background-color: #f0f0f0;
+    border: 0;
+    color: var(--color-principal);
+    border-radius: 0.5em;
+    font-size: 1.35rem;
+    padding: 0.375em 1em;
+    font-weight: 600;
+    text-shadow: 0 1em 0 #fff;
+    box-shadow: var(--sombra-antes);
+    transition: 0.15s ease;
+    cursor: pointer;
+}
+.btn:hover{
+    color: #fc1717;
+}
+.btn:active, .form-container form .box:active {
+    translate: 0 0.225em;
+    box-shadow: var(--sombra-active);
+}
+.tooltip-container {
+    position: relative;
+    background: var(--color-principal);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 13px; 
+    width: 25px; 
+    height: 25px; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #fff;
+}
+
+.tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    transform-origin: bottom;
+    padding: 0.5em 1em; 
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    background: var(--color-principal);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: auto; 
+    white-space: nowrap;
+}
+
+.tooltip::before {
+    position: absolute;
+    content: "";
+    height: 0.6em;
+    width: 0.6em;
+    bottom: -0.2em;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    background: var(--color-principal);
+}
+
+.tooltip-container:hover .tooltip {
+    top: -45px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-10%) scale(1);
+}
+
+
+.form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 4% 0;
+    position: relative;
+}
+.form-container form{
+    background-color: var(--color-formulario);
+    box-shadow: var(--sombra-antes);
+    border-radius: 3rem;
+    padding: 1rem;
+}
+.form-container form .flex{
+    display: flex;
+    gap: 1rem;
+}
+.form-container form .flex .col{
+    flex: 1 1 15rem;
+}
+.form-container .register{
+    width: 45rem;
+}
+.form-container form h3{
+    text-align: center;
+    font-size: 2rem;
+    color: var(--color-principal);
+    text-transform: capitalize;
+    font-weight: bolder;
+}
+.form-container form p{
+    padding-top: 1rem;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    color: var(--color-principal);
+    font-weight: 600;
+}
+.asterisco {
+    color: red; 
+}
+.form-container form .link{
+    padding-bottom: 1rem;
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+.form-container form .link a{
+    color: var(--color-principal);
+}
+.form-container form .box{
+    background-color: #f0f0f0;
+    box-shadow: var(--sombra-antes);
+    width: 100%;
+    border-radius: 5rem;
+    margin: .5rem 0;
+    font-size: 1rem;
+    padding: 0.5rem;
+    text-shadow: 0 0.0625em 0 #fff;
+}
+.form-container form textarea{
+    height: 3rem;
+    resize: none;
+}
+.form-container form select{
+    height: 3rem;
+    resize: none;
+    display: block; 
+    margin: 10px auto;
+    width: calc(100% - 2rem);
+}
+.form-container form .btn{
+    display: block; 
+    margin: 20px auto;
+    width: 25%;
+    font-size: 1.2rem;
+}
+
+
+
+
+
+

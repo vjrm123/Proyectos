@@ -72,6 +72,7 @@ bool LE<T>::add(T v) {
         dato_fin = fin->arr;
     }
     else { dato_fin++; }
+    
     if (!p) { p = fin; dato = p->arr; }
     T temp = 0;
     while (dato != dato_fin) {
