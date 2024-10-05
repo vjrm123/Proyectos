@@ -12,53 +12,41 @@ public:
     nodo<T>* head = nullptr;
     nodo<T>* tail = nullptr;
 
-    // Método para insertar un valor al final de la cola (tail)
     void push(T valor) {
         nodo<T>* nuevo = new nodo<T>();
         nuevo->valor = valor;
         
-        if (tail != nullptr) {
-            tail->next = nuevo;
-        }
+        tail ? tail->next = nuevo : head = nuevo;
         tail = nuevo;
-
-        if (head == nullptr) {
-            head = tail;
-        }
     }
 
-    // Método para extraer un valor desde el frente de la cola (head)
+
     bool pop(T& valor) {
-        if (head == nullptr) {
-            return false;  // Cola vacía
-        }
+    if (!head) return false;
 
-        valor = head->valor;
-        nodo<T>* temp = head;
-        head = head->next;
+    valor = head->valor;
+    nodo<T>* temp = head;
+    head = head->next;
+    
+    tail = head ? tail : nullptr; 
 
-        if (head == nullptr) {
-            tail = nullptr;  
-        }
+    delete temp;
+    return true;
+}
 
-        delete temp;
-        return true;
-    }
 
-    // Método para imprimir la cola desde head hasta tail
     void print() {
         nodo<T>* actual = head;
-        while (actual != nullptr) {
+        while (actual) {
             std::cout << actual->valor << " ";
             actual = actual->next;
         }
         std::cout << std::endl;
     }
 
-    // Destructor para liberar la memoria de la cola
     ~Cola() {
         T temp;
-        while (pop(temp));  // Vaciar la cola liberando memoria
+        while (pop(temp)); 
     }
 };
 
@@ -73,7 +61,7 @@ int main() {
 
     int valor;
     miCola.pop(valor);  
-    std::cout << "Valor extraido: " << valor << std::endl;
+    std::cout << "pop Valor : " << valor << std::endl;
 
     miCola.print();  
 

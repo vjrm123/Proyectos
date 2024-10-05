@@ -1,49 +1,47 @@
 #include <iostream>
 
 template<class T>
-struct nodo {
-    T valor;
-    nodo* siguiente = nullptr;
+struct node {
+    T value;
+    node* next = nullptr;
 };
 
 template<class T>
 class Pila {
 public:
-    nodo<T>* top = nullptr;
+    node<T>* top = nullptr;
 
-    void push(T valor) {
-        nodo<T>* nuevo = new nodo<T>();
-        nuevo->valor = valor;
-        nuevo->siguiente = top;
+    void push(T value) {
+        node<T>* nuevo = new node<T>(); 
+        nuevo->value = value;
+        nuevo->next = top;
         top = nuevo;
     }
 
     bool pop() {
-        if (top == nullptr) {
-            return false;  
-        }
-        
-        nodo<T>* temp = top;
-        top = top->siguiente;
+        if (!top) return false;
+        node<T>* temp = top;
+        top = top->next;
         delete temp;
         return true;
     }
 
     void print() {
-        nodo<T>* actual = top;
-        while (actual != nullptr) {
-            std::cout << actual->valor << " ";
-            actual = actual->siguiente;
+        node<T>* current = top;
+        while (current) {
+            std::cout << current->value << " ";
+            current = current->next;
         }
         std::cout << std::endl;
     }
+
     ~Pila() {
         while (pop()); 
     }
 };
 
 int main() {
-    Pila<int> miPila;
+    Pila<int> miPila; 
 
     miPila.push(10);
     miPila.push(20);

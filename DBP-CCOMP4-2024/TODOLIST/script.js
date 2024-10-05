@@ -21,13 +21,13 @@ function agregarTarea(tarea, id, realizado, eliminado) {
 
     const elemento = `
         <li>
-            <i class="far ${REALIZADO}" data-realizado="true" id="check-${id}"></i>
-            <p class="text ${LINEA}" id="tarea-${id}">${tarea}</p>
-            <div class="iconos">
-                <i class="fas fa-edit editar" data-editar="true" id="edit-${id}"></i>
-                <i class="fas fa-trash de" data-eliminado="true" id="delete-${id}"></i>
-            </div>
-        </li>
+        <i class="far ${REALIZADO}" data-realizado="true" id="check-${id}"></i>
+        <p class="text ${LINEA}" id="tarea-${id}">${tarea}</p>
+        <div class="iconos">
+            <i class="fas fa-edit editar" data-editar="true" id="edit-${id}"></i>
+            <i class="fas fa-trash de" data-eliminado="true" id="delete-${id}"></i>
+        </div>
+    </li>
     `;
     
     lista.insertAdjacentHTML("beforeend", elemento);
