@@ -1,3 +1,4 @@
+
 #include <iostream>
 
 using namespace std;
@@ -12,103 +13,89 @@ public:
 };
 
 class ListaDobleCircular {
-    nodo* cabeza;
-    nodo* cola;
+    nodo* head;
+    nodo* tail;
 
 public:
-    ListaDobleCircular() : cabeza(NULL), cola(NULL) {}
+    ListaDobleCircular() : head(NULL), tail(NULL) {}
 
     // Añadir un nodo al final
     void add(int value) {
-        nodo* nuevoNodo = new nodo(value);
-        if (!cabeza) {  // Si la lista está vacía
-            cabeza = cola = nuevoNodo;
-            cabeza->next = cabeza;  // Conectar el primer nodo consigo mismo
-            cabeza->prev = cabeza;  // Conectar el primer nodo consigo mismo
-        } else {
-            cola->next = nuevoNodo;  // Conectar el último nodo con el nuevo nodo
-            nuevoNodo->prev = cola;  // El nuevo nodo apunta al nodo anterior
-            nuevoNodo->next = cabeza;  // El nuevo nodo apunta al primero (circularidad)
-            cabeza->prev = nuevoNodo;  // El primer nodo apunta al nuevo nodo
-            cola = nuevoNodo;  // Actualizar la cola
+        nodo* nuevo = new nodo(value);
+        if (!head) {
+            head = tail = nuevo;
+            head->next = head;
+            head->prev = head;
+        }
+        else {
+            tail->next = nuevo;
+            nuevo->prev = tail;
+            nuevo->next = head;
+            head->prev = nuevo;
+            tail = nuevo;
         }
     }
 
     // Eliminar un nodo con un valor dado
     void del(int value) {
-        if (!cabeza) {
-            cout << "Lista vacía, no se puede eliminar.\n";
-            return;
-        }
+        if (!head) return;
+        nodo* temp = head;
 
-        nodo* actual = cabeza;
-
-        // Buscar el nodo que contiene el valor
+        // Buscar el nodo a eliminar
         do {
-            if (actual->data == value) break;
-            actual = actual->next;
-        } while (actual != cabeza);
+            if (temp->data == value) break;
+            temp = temp->next;
+        } while (temp != head);
 
-        if (actual->data != value) {
-            cout << "Valor no encontrado en la lista.\n";
+        // Si no se encontró el valor, salir
+        if (temp->data != value) return;
+
+        // Si es el único nodo en la lista
+        if (temp == head && temp == tail) {
+            delete temp;
+            head = tail = nullptr;
             return;
         }
 
-        // Si la lista tiene un solo nodo
-        if (actual == cabeza && actual == cola) {
-            delete actual;
-            cabeza = cola = NULL;
-            return;
-        }
+        // Ajustar los punteros
+        temp->prev->next = temp->next;
+        temp->next->prev = temp->prev;
 
-        // Si el nodo a eliminar es la cabeza
-        if (actual == cabeza) {
-            cabeza = cabeza->next;  // La cabeza apunta al siguiente nodo
-            cabeza->prev = cola;  // La nueva cabeza apunta a la cola
-            cola->next = cabeza;  // La cola apunta a la nueva cabeza
-        }
-        // Si el nodo a eliminar es la cola
-        else if (actual == cola) {
-            cola = cola->prev;  // Mover la cola al nodo anterior
-            cola->next = cabeza;  // La nueva cola apunta a la cabeza
-            cabeza->prev = cola;  // La cabeza apunta a la nueva cola
-        }
-        // Si el nodo está en el medio
-        else {
-            actual->prev->next = actual->next;  // Saltar el nodo en la cadena
-            actual->next->prev = actual->prev;  // Ajustar el puntero prev del siguiente nodo
-        }
+        // Actualizar head o tail si es necesario
+        if (temp == head) head = head->next;
+        if (temp == tail) tail = tail->prev;
 
-        delete actual;  // Liberar el nodo eliminado
+        delete temp;
     }
+
 
     // Imprimir la lista de izquierda a derecha (hacia adelante)
     void printForward() {
-        if (!cabeza) {
+        if (!head) {
             cout << "Lista vacía.\n";
             return;
         }
-        nodo* temp = cabeza;
+        nodo* temp = head;
         cout << "Lista hacia adelante: cabeza -> ";
         do {
             cout << temp->data << " -> ";
             temp = temp->next;
-        } while (temp != cabeza);
+        } while (temp != head);
         cout << "cabeza\n";  // Para indicar que la lista es circular
     }
 
     // Imprimir la lista de derecha a izquierda (hacia atrás)
     void printBackward() {
-        if (!cola) {
+        if (!tail) {
             cout << "Lista vacía.\n";
             return;
         }
-        nodo* temp = cola;
+        nodo* temp = tail;
         cout << "Lista hacia atrás: cola -> ";
         do {
             cout << temp->data << " -> ";
             temp = temp->prev;
-        } while (temp != cola);
+        } while (temp != tail);
         cout << "cola\n";  // Para indicar que la lista es circular
     }
 };
@@ -116,7 +103,7 @@ public:
 int main() {
     int ADD[10] = { 2, 4, 6, 8, 10, 1, 3, 5, 7, 9 };
     int DEL[10] = { 9, 7, 5, 3, 1, 10, 8, 6, 4, 2 };
-    
+
     ListaDobleCircular LDC;
 
     // Agregar elementos a la lista

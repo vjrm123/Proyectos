@@ -3,7 +3,8 @@
 template<class T>
 struct node {
     T value;
-    node* next = nullptr;
+    node* next;
+    node(T value, node* next = nullptr) : value(value), next(next) {}
 };
 
 template<class T>
@@ -12,10 +13,7 @@ public:
     node<T>* top = nullptr;
 
     void push(T value) {
-        node<T>* nuevo = new node<T>(); 
-        nuevo->value = value;
-        nuevo->next = top;
-        top = nuevo;
+        top = new node<T>(value, top);  
     }
 
     bool pop() {
@@ -36,21 +34,21 @@ public:
     }
 
     ~Pila() {
-        while (pop()); 
+        while (pop());
     }
 };
 
 int main() {
-    Pila<int> miPila; 
+    Pila<int> miPila;
 
     miPila.push(10);
     miPila.push(20);
     miPila.push(30);
 
-    miPila.print();  
+    miPila.print(); 
 
     miPila.pop();  
-    miPila.print();  
+    miPila.print(); 
 
     return 0;
 }

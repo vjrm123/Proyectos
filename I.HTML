@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesión con efecto de olas y confeti</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilos para el contenedor principal */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        .login-box {
+            position: relative;
+            z-index: 1;
+            box-shadow: inset 5px 5px 5px #bababa, inset -5px -5px 5px #ffffff; /* Sombra añadida */
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red; /* Color del confeti */
+            opacity: 0.8;
+            pointer-events: none; /* Para que no interfiera con los clics */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center">
+    <!-- Lienzo para el efecto de olas -->
+    <canvas id="waveCanvas"></canvas>
+    <!-- Contenedor del formulario -->
+    <div class="login-box bg-white shadow-lg rounded-lg p-8" id="formulario">
+        <h2 class="text-2xl font-bold text-center mb-6">Iniciar sesión</h2>
+        <form class="space-y-4">
+            <input type="text" placeholder="Usuario" class="w-full px-4 py-2 border rounded-md">
+            <input type="password" placeholder="Contraseña" class="w-full px-4 py-2 border rounded-md">
+            <div class="flex justify-between">
+                <button type="button" id="iniciarButton" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Iniciar</button>
+                <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Comprar</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Configuración para el lienzo de olas
+        const canvas = document.getElementById('waveCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let waveArray = [];
+
+        function createWave(x, y) {
+            const wave = {
+                x: x,
+                y: y,
+                radius: 0,
+                maxRadius: 100 + Math.random() * 100,
+                alpha: 0.5,
+            };
+            waveArray.push(wave);
+        }
+
+        function drawWaves() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < waveArray.length; i++) {
+                let wave = waveArray[i];
+                ctx.beginPath();
+                ctx.arc(wave.x, wave.y, wave.radius, 0, Math.PI * 2);
+
+                // Colores simulando agua
+                ctx.strokeStyle = `rgba(0, 150, 255, ${wave.alpha})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                wave.radius += 1;
+                wave.alpha -= 0.005;
+
+                if (wave.alpha <= 0) {
+                    waveArray.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        function animate() {
+            drawWaves();
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Añadir evento de movimiento del ratón para generar las olas
+        window.addEventListener('mousemove', function (e) {
+            createWave(e.clientX, e.clientY);
+        });
+
+        // Ajustar el tamaño del lienzo si la ventana cambia de tamaño
+        window.addEventListener('resize', function () {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Función para generar confeti
+        function createConfetti(x, y) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = `${x}px`;
+            confetti.style.top = `${y}px`;
+
+            document.body.appendChild(confetti);
+
+            // Animación del confeti
+            setTimeout(() => {
+                confetti.style.transform = `translateY(${Math.random() * 500}px) rotate(${Math.random() * 360}deg)`;
+                confetti.style.opacity = '0';
+            }, 10);
+
+            // Remover el confeti después de un tiempo
+            setTimeout(() => {
+                confetti.remove();
+            }, 1000);
+        }
+
+        // Evento al hacer clic en el botón "Iniciar"
+        document.getElementById('iniciarButton').addEventListener('click', (event) => {
+            const { clientX, clientY } = event;
+            for (let i = 0; i < 30; i++) { // Crear múltiples piezas de confeti
+                createConfetti(clientX + (Math.random() - 0.5) * 50, clientY + (Math.random() - 0.5) * 50);
+            }
+        });
+    </script>
+</body>
+</html>
