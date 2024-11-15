@@ -1,0 +1,12 @@
+type Query {
+  bienvenida: String!
+  despedida(nombre: String!): String!
+  obtenerPersona(id: ID!): Persona
+  obtenerEdad(id: ID!): Int
+}
+
+type Persona {
+  id: ID!
+  nombre: String!
+  edad: Int!
+}
