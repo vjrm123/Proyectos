@@ -38,7 +38,6 @@ private:
     vector<node*> findCousins(node* p);
 };
 
-// Agregar un nodo al árbol
 bool cbintree::add(int valor) {
     node** p = &root;
     while (*p != nullptr) {
@@ -49,7 +48,6 @@ bool cbintree::add(int valor) {
     return true;
 }
 
-// Limpiar el árbol
 void cbintree::clear(node* p) {
     if (!p) return;
     clear(p->nod[0]);
@@ -57,7 +55,6 @@ void cbintree::clear(node* p) {
     delete p;
 }
 
-// Encontrar un nodo específico
 node* cbintree::findNode(node* p, int value) {
     if (!p) return nullptr;
     if (p->valor == value) return p;
@@ -65,7 +62,6 @@ node* cbintree::findNode(node* p, int value) {
     return findNode(p->nod[1], value);
 }
 
-// Encontrar el padre de un nodo
 node* cbintree::findParent(node* p, node* child) {
     if (!p || !child) return nullptr;
     if (p->nod[0] == child || p->nod[1] == child) return p;
@@ -73,26 +69,25 @@ node* cbintree::findParent(node* p, node* child) {
     return findParent(p->nod[1], child);
 }
 
-// Encontrar los tíos del nodo (hermanos del padre)
 vector<node*> cbintree::findUncles(node* p) {
     vector<node*> uncles;
     if (!p || !root) return uncles;
+
     node* parent = findParent(root, p);
     if (parent) {
         node* grandParent = findParent(root, parent);
         if (grandParent) {
-            if (grandParent->nod[0] == parent && grandParent->nod[1] != nullptr) {
-                uncles.push_back(grandParent->nod[1]);
-            }
-            if (grandParent->nod[1] == parent && grandParent->nod[0] != nullptr) {
+            if (grandParent->nod[0] && grandParent->nod[0] != parent) {
                 uncles.push_back(grandParent->nod[0]);
+            }
+            if (grandParent->nod[1] && grandParent->nod[1] != parent) {
+                uncles.push_back(grandParent->nod[1]);
             }
         }
     }
     return uncles;
 }
 
-// Encontrar los primos del nodo (hijos de los hermanos del padre)
 vector<node*> cbintree::findCousins(node* p) {
     vector<node*> cousins;
     vector<node*> uncles = findUncles(p);
@@ -103,7 +98,6 @@ vector<node*> cbintree::findCousins(node* p) {
     return cousins;
 }
 
-// Calcular las posiciones de cada nodo
 void cbintree::calculatePositions(node* p, int x, int y, int horizontalOffset, map<node*, pair<int, int>>& positions) {
     if (!p) return;
     positions[p] = make_pair(x, y);
@@ -111,14 +105,12 @@ void cbintree::calculatePositions(node* p, int x, int y, int horizontalOffset, m
     calculatePositions(p->nod[1], x + horizontalOffset, y + 80, horizontalOffset / 2, positions);
 }
 
-// Dibuja el nodo con el color adecuado
 void cbintree::drawNodeWithColor(sf::RenderWindow& window, node* nodePtr, sf::Font& font, int xPos, int yPos, sf::Color color) {
     sf::CircleShape circle(20);
     circle.setFillColor(color);
     circle.setPosition(xPos, yPos);
     window.draw(circle);
 
-    // Texto del valor del nodo
     sf::Text text;
     text.setFont(font);
     text.setString(to_string(nodePtr->valor));
@@ -131,7 +123,6 @@ void cbintree::drawNodeWithColor(sf::RenderWindow& window, node* nodePtr, sf::Fo
     window.draw(text);
 }
 
-// Dibuja las conexiones entre nodos
 void cbintree::drawEdges(sf::RenderWindow& window, node* nodePtr, const map<node*, pair<int, int>>& positions) {
     if (nodePtr->nod[0] != nullptr) {
         sf::Vertex line[] = {
@@ -149,9 +140,7 @@ void cbintree::drawEdges(sf::RenderWindow& window, node* nodePtr, const map<node
     }
 }
 
-// Dibujar todo el árbol
 void cbintree::drawTree(sf::RenderWindow& window, node* p, sf::Font& font, map<node*, pair<int, int>>& positions, int selectedNodeValue) {
-    // Obtener el nodo seleccionado
     node* selectedNode = findNode(p, selectedNodeValue);
     vector<node*> uncles;
     vector<node*> cousins;
@@ -161,35 +150,31 @@ void cbintree::drawTree(sf::RenderWindow& window, node* p, sf::Font& font, map<n
         cousins = findCousins(selectedNode);
     }
 
-    // Dibujar las conexiones entre nodos
     for (auto& it : positions) {
         drawEdges(window, it.first, positions);
     }
 
-    // Dibujar los nodos
     for (auto& it : positions) {
         node* currentNode = it.first;
         int xPos = it.second.first;
         int yPos = it.second.second;
 
-        // Verificar si el nodo es tío, primo o el seleccionado
-        sf::Color color = sf::Color::Green; // Color por defecto para los demás nodos
+        sf::Color color = sf::Color::Green; 
 
         if (currentNode == selectedNode) {
-            color = sf::Color::Red; // Nodo seleccionado
+            color = sf::Color::Red;
         }
         else if (find(uncles.begin(), uncles.end(), currentNode) != uncles.end()) {
-            color = sf::Color::Blue; // Tíos
+            color = sf::Color::Blue;
         }
         else if (find(cousins.begin(), cousins.end(), currentNode) != cousins.end()) {
-            color = sf::Color::Cyan; // Primos
+            color = sf::Color::Cyan; 
         }
 
         drawNodeWithColor(window, currentNode, font, xPos, yPos, color);
     }
 }
 
-// Función principal de dibujo
 void cbintree::draw(sf::RenderWindow& window, sf::Font& font, sf::Vector2i mousePos, int selectedNodeValue) {
     if (root == nullptr) return;
 
@@ -198,7 +183,6 @@ void cbintree::draw(sf::RenderWindow& window, sf::Font& font, sf::Vector2i mouse
     drawTree(window, root, font, positions, selectedNodeValue);
 }
 
-// Main para probar
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Visualización de Árbol Binario");
     sf::Font font;
@@ -210,11 +194,6 @@ int main() {
 
     cbintree tree;
 
-    // Agregar nodos
-
-
-
-    // Agregar nodos
     tree.add(8);
     tree.add(4);
     tree.add(2);
@@ -231,7 +210,7 @@ int main() {
     tree.add(13);
     tree.add(15);
 
-    int selectedNodeValue = 3; // Nodo seleccionado por teclado
+    int selectedNodeValue = 3; 
 
     while (window.isOpen()) {
         sf::Event event;

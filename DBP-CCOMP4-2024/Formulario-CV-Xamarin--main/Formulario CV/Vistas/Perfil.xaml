@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Formulario_CV.Vistas.Perfil">
+    <StackLayout>
+        <Label Text="Descripción:"
+               FontSize="30" />
+        <Entry Placeholder="Escribe la informacion de tu perfil aqui"
+               x:Name="info_perfil"
+               />
+        <Button Text="Siguiente"
+                BackgroundColor="#80AEFF"
+                FontSize="25"
+                x:Name="btncompletado"
+                Clicked="btncompletado_Clicked" />
+    </StackLayout>
+</ContentPage>

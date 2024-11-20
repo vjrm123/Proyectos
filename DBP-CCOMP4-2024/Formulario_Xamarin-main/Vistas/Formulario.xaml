@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Formulario_CV.Vistas.Formulario">
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout BackgroundColor="#FEE6B9">
+            <Label Text="Formulario a CV"
+                   FontSize="40"
+                   FontAttributes="Bold"
+                   Margin="0,20,0,0"
+                   HorizontalOptions="Center"/>
+            <Frame VerticalOptions="FillAndExpand"
+                   Margin="20"
+                   CornerRadius="20"
+                   HasShadow="False">
+                <StackLayout VerticalOptions="Center"
+                             Spacing="20">
+                    <Entry Keyboard="Text"
+                           Placeholder="Nombres"
+                           x:Name="txtname"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Retorno:"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                            />
+                        <Label Text="No ingresado"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               x:Name="Rname"
+                            />
+                    </StackLayout>
+                    
+                    <Entry Keyboard="Text"
+                           Placeholder="Apellidos"
+                           x:Name="txtapellido"/>
+                    
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Retorno:"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                            />
+                        <Label Text="No ingresado"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               x:Name="Rlast"
+                            />
+                    </StackLayout>
+
+
+                    <Entry Keyboard="Text"
+                           Placeholder="Ocupacion"
+                           x:Name="txtocupacion"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Retorno:"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                            />
+                        <Label Text="No ingresado"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               x:Name="Rocupacion"
+                            />
+                    </StackLayout>
+
+                    <Entry Keyboard="Telephone"
+                           Placeholder="Telefono"
+                           x:Name="txttelefono"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Retorno:"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                            />
+                        <Label Text="No ingresado"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               x:Name="Rtelefono"
+                            />
+                    </StackLayout>
+
+                    <Entry Keyboard="Email"
+                           Placeholder="Email"
+                           x:Name="txtemail"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Retorno:"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                            />
+                        <Label Text="No ingresado"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"
+                               x:Name="Remail"
+                            />
+                    </StackLayout>
+
+                    <Button Text="Enviar"
+                            TextTransform="None"
+                            BackgroundColor="#FDE080"
+                            CornerRadius="10"
+                            FontSize="Medium"
+                            FontAttributes="Bold"
+                            
+                            x:Name="btniniciar"
+                            Clicked="btniniciar_Clicked"/>
+
+                    <Button Text="Mostrar"
+                            TextTransform="None"
+                            BackgroundColor="#FDE080"
+                            CornerRadius="10"
+                            FontSize="Medium"
+                            FontAttributes="Bold"
+                            
+                            x:Name="btnmostrar"
+                            Clicked="btnmostrar_Clicked"/>
+
+                </StackLayout>
+                
+            </Frame>
+        </StackLayout>
+       </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Formulario_CV.Vistas.CV">
+    <ContentPage.Content>
+        <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" BackgroundColor="Gray">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTiM1rweE2Spk3O_JwPNGl7t9TYpJZVpv1pHetgjsMCTJLjin8C"
+                       WidthRequest="200" HeightRequest="200" Margin="40,0,10,0" VerticalOptions="Center" HorizontalOptions="Start"
+                       Aspect="AspectFill" />
+
+                <StackLayout Grid.Column="1" VerticalOptions="Center" Margin="10">
+                    <Label Text="José Martínez" FontSize="30" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Label Text="PUESTO OCUPADO/BUSCANDO" FontSize="20" TextColor="LightGray" HorizontalTextAlignment="Center" />
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="1" Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="6*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Parte izquierda -->
+                    <StackLayout>
+                    <Label Text="CONTACTO" FontSize="20" FontAttributes="Bold" TextDecorations="Underline"/>
+                    <Label Text="999 999 999"/>
+                    <Label Text="jose.martinez@gmail.com"/>
+                    <Label Text="México DF"/>
+                    <Label Text="linkendin.com/se.martinez"/>
+
+                    <Label Text="IDIOMAS" FontSize="20" FontAttributes="Bold" TextDecorations="Underline" Margin="0,10,0,0"/>
+                    <Label Text="Español: nativo" Margin="0,5,0,0"/>
+                    <Label Text="Inglés: bilingue (TOEIC 950)" Margin="0,5,0,0"/>
+                    <Label Text="Francés: Intermedio (B2)" Margin="0,5,0,0"/>
+
+                    <Label Text="APTITUDES" FontSize="20" FontAttributes="Bold" TextDecorations="Underline" Margin="0,10,0,0"/>
+                    <Label Text="• Inteligencia emocional" Margin="0,5,0,0"/>
+                    <Label Text="• Espíritu crítico" Margin="0,5,0,0"/>
+                    <Label Text="• Trabajo en equipo" Margin="0,5,0,0"/>
+                    <Label Text="• Capacidad analítica" Margin="0,5,0,0"/>
+                    <Label Text="• Habilidades físicas" Margin="0,5,0,0"/>
+
+                    <Label Text="HABILIDADES" FontSize="20" FontAttributes="Bold" TextDecorations="Underline" Margin="0,10,0,0"/>
+                    <Label Text="• Acondicionamiento físico" Margin="0,5,0,0"/>
+                    <Label Text="• Creación de videos deportivos" Margin="0,5,0,0"/>
+                    <Label Text="• Pack Office" Margin="0,5,0,0"/>
+                    <Label Text="• Tenis" Margin="0,5,0,0"/>
+
+                    <Label Text="OTROS INTERESES" FontSize="20" FontAttributes="Bold" TextDecorations="Underline" Margin="0,10,0,0"/>
+                    <Label Text="• Creador de vincanas" Margin="0,5,0,0"/>
+                    <Label Text="• Paseos ecologicos grupales" Margin="0,5,0,0"/>
+                    <Label Text="• Lectura grupal" Margin="0,5,0,0"/>
+                </StackLayout>
+
+                <!-- Parte derecha -->
+                <StackLayout Grid.Column="1">
+                    <Label Text="PERFIL" FontSize="20" FontAttributes="Bold" TextDecorations="Underline"/>
+                    <Label Text="Trabajo social con 4 años de experiencia en proyectos colectivos" />
+                    <Label Text="Mi objetivo es lograr que los jóvenes obtengan acceso a la educación superior mediante logros deportivos" />
+
+                    <Label Text="EXPERIENCIA LABORAL" FontSize="20" FontAttributes="Bold" TextDecorations="Underline" Margin="0,10,0,0"/>
+                    <Label Text="Trabajador Social" FontSize="18" FontAttributes="Bold"/>
+                    <Label Text="México DF | 2022-actualmente" TextColor="Gray"/>
+                    <Label Text="• Coordinador y mediador entre los equipos de ayuda psicológica a jóvenes y niños en exclusión social."/>
+                    <Label Text="• Velar por la salud mental del equipo y de miembros involucrados en proyectos."/>
+                    <Label Text="• Mapeo de necesidades estratégicas y lógicas para las diferentes áreas."/>
+                    <Label Text="• Monitor de ejercicios físicos para adolescentes."/>
+                    <Label Text="• Programar diferentes actividades extracurriculares."/>
+
+                    <Label Text="Trabajador Social" FontSize="18" FontAttributes="Bold"/>
+                    <Label Text="México DF | 2020-2022" TextColor="Gray"/>
+                    <Label Text="• Funciones para seguimiento de casos para jóvenes con problemas de adicciones."/>
+                    <Label Text="• Capacitaciones e integración vinculadas a medidas preventivas."/>
+                    <Label Text="• Recopilación de evidencias para auditorías y programas sociales."/>
+
+                    <Label Text="Trabajador Social (prácticas)" FontSize="18" FontAttributes="Bold"/>
+                    <Label Text="Zaragoza, España | 2019-2020" TextColor="Gray"/>
+                    <Label Text="• Profesor de lengua española e inglesa para jóvenes migrantes."/>
+                    <Label Text="• Monitor de actividades ecológicas con adolescentes."/>
+                    <Label Text="• Coordinador de áreas deportivas."/>
+
+                    <Label Text="FORMACIÓN" FontSize="20" FontAttributes="Bold" TextDecorations="Underline" Margin="0,10,0,0"/>
+                    <Label Text="Grado de Trabajo Social" FontSize="18" FontAttributes="Bold"/>
+                    <Label Text="Universidad XYZ" TextColor="Gray"/>
+                    <Label Text="México DF | 2016-2020"/>
+
+                    <Label Text="Licenciatura en Psicología" FontSize="18" FontAttributes="Bold"/>
+                    <Label Text="Universidad ABC" TextColor="Gray"/>
+                    <Label Text="México DF | 2014-2016"/>
+
+                    <Label Text="Certificación en Coaching" FontSize="18" FontAttributes="Bold"/>
+                    <Label Text="Instituto XYZ" TextColor="Gray"/>
+                    <Label Text="México DF | 2020"/>
+
+                    <Label Text="Certificación en Primeros Auxilios" FontSize="18" FontAttributes="Bold"/>
+                    <Label Text="Cruz Roja Mexicana" TextColor="Gray"/>
+                    <Label Text="México DF | 2018"/>
+                </StackLayout>
+            </Grid>
+        </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

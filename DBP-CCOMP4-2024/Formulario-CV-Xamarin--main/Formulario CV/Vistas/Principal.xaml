@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Formulario_CV.Vistas.Principal"
+             NavigationPage.HasNavigationBar="False">
+    <StackLayout BackgroundColor="#919191">
+        <Label Text="Formulario CV"
+               FontSize="40"
+               TextColor="White"
+               FontAttributes="Bold"
+               Margin="0,20,0,0"
+               HorizontalOptions="Center" />
+        <Frame VerticalOptions="FillAndExpand"
+               Margin="20"
+               CornerRadius="20"
+               HasShadow="False">
+            <StackLayout VerticalOptions="Center"
+                         Spacing="50">
+                <Image Source="https://i.ibb.co/pW14gKM/formulario.png" />
+                <Button Text="Comenzar"
+                        FontSize="Medium"
+                        Background="#919191"
+                        TextTransform="None"
+                        x:Name="btn_datos_personales"
+                        Clicked="btn_datos_personales_Clicked" />
+            </StackLayout>
+        </Frame>
+        <Label Text="By: Joel Reinoso"
+               TextColor="Black"
+               FontSize="20"
+               Margin="20,0,0,10"
+/>
+    </StackLayout>
+</ContentPage>

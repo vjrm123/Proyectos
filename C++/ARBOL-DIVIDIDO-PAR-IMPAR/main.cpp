@@ -1,90 +1,220 @@
 #include <iostream>
+#include <SFML/Graphics.hpp>
 #include <queue>
+#include <map>
+using namespace std;
 
-struct CBinTreeNode
-{
-    CBinTreeNode(int v)
-    {
-        value = v;
-        nodes[0] = nodes[1] = nullptr;
+struct arbol_nodo {
+    int val;
+    arbol_nodo* arr[2];
+    arbol_nodo(int v) {
+        val = v;
+        arr[0] = NULL;
+        arr[1] = NULL;
     }
-    CBinTreeNode* nodes[2];
-    int value;
 };
 
-class CBinTree
-{
-public:
-    CBinTree();
-    void Print();
-    bool Insert(int x, bool isLeft);
+class arbol {
 private:
-    bool Find(int x, CBinTreeNode**& p, bool isLeft);
-    void Levels(CBinTreeNode* n);
-    CBinTreeNode* root;
+    bool find(int v, arbol_nodo**& x);
+    arbol_nodo* root;
+    arbol_nodo** recorrer(arbol_nodo**& y);
+    void in_order(arbol_nodo* n);
+    void dibujar(sf::RenderWindow& window, arbol_nodo* node, float x, float y, float offsetX, float offsetY);
+
+    // Mapa para almacenar colores de los nodos
+    std::map<arbol_nodo*, sf::Color> colores;
+
+public:
+    bool push(int v);
+    bool remove(int v);
+    void print();
+    void pintar_tios_primos(int valor);
+    void VecInsert(arbol* t, int* v, int size);
+
+    arbol();
 };
 
-CBinTree::CBinTree()
-{
-    root = nullptr;
+arbol::arbol() {
+    root = NULL;
 }
 
-bool CBinTree::Find(int x, CBinTreeNode**& p, bool isLeft)
-{
-    for (p = &root; *p && (*p)->value != x;
-        p = &((*p)->nodes[isLeft ? 0 : 1])); // Selecciona izquierda o derecha basado en isLeft
-    return *p != nullptr;
+bool arbol::find(int v, arbol_nodo**& x) {
+    x = &root;
+    while (*x && (*x)->val != v) {
+        x = &((*x)->arr[v > (*x)->val]);
+    }
+    return *x != 0;
 }
 
-bool CBinTree::Insert(int x, bool isLeft)
-{
-    CBinTreeNode** p;
-    if (Find(x, p, isLeft)) return false; // Si ya existe, no lo inserta
-    *p = new CBinTreeNode(x);
-    return true;
+arbol_nodo** arbol::recorrer(arbol_nodo**& z) {
+    arbol_nodo** y;
+    y = &((*z)->arr[0]);
+    while ((*y)->arr[1] != NULL) {
+        y = &((*y)->arr[1]);
+    }
+    return y;
 }
 
-void CBinTree::Levels(CBinTreeNode* n)
-{
-    if (!n) return;
-    std::queue<std::pair<CBinTreeNode*, int>> q;
-    q.push({ n,0 });
-    int l = 0;
-    while (!q.empty())
-    {
-        int last = l;
-        std::pair<CBinTreeNode*, int> pp = q.front();
-        CBinTreeNode* nn = pp.first;
-        l = pp.second;
-        if (nn->nodes[0])  q.push({ nn->nodes[0],l + 1 });
-        if (nn->nodes[1])  q.push({ nn->nodes[1],l + 1 });
-        if (last != l)    std::cout << "\n";
-        std::cout << nn->value << "(" << l << ") ";
+bool arbol::push(int v) {
+    arbol_nodo** b;
+    if (find(v, b)) {
+        return 0;
+    }
+    *b = new arbol_nodo(v);
+    return 1;
+}
+
+bool arbol::remove(int v) {
+    arbol_nodo** b;
+    if (!find(v, b)) {
+        return 0;
+    }
+    else {
+        if ((*b)->arr[0] && (*b)->arr[1]) {
+            arbol_nodo** y = recorrer(b);
+            (*b)->val = (*y)->val;
+            b = y;
+        }
+        arbol_nodo* h = *b;
+        *b = (*b)->arr[(*b)->arr[0] == 0];
+        delete h;
+        return 1;
+    }
+}
+
+
+void arbol::pintar_tios_primos(int valor) {
+    if (!root) return;
+
+    std::queue<std::pair<arbol_nodo*, int>> q;
+    q.push({ root, 0 });
+
+    arbol_nodo* nodo_objetivo = nullptr;
+    int nivel_objetivo = -1;
+    arbol_nodo* padre_objetivo = nullptr;
+
+    // Buscar el nodo objetivo, su nivel y su padre
+    while (!q.empty()) {
+        arbol_nodo* nodo = q.front().first;
+        int nivel = q.front().second;
         q.pop();
+
+        if ((nodo->arr[0] && nodo->arr[0]->val == valor) ||
+            (nodo->arr[1] && nodo->arr[1]->val == valor)) {
+            nodo_objetivo = (nodo->arr[0] && nodo->arr[0]->val == valor) ? nodo->arr[0] : nodo->arr[1];
+            nivel_objetivo = nivel + 1;
+            padre_objetivo = nodo;
+            break;
+        }
+
+        if (nodo->arr[0]) q.push({ nodo->arr[0], nivel + 1 });
+        if (nodo->arr[1]) q.push({ nodo->arr[1], nivel + 1 });
+    }
+
+    if (!nodo_objetivo) return; // Nodo no encontrado
+
+
+    q.push({ root, 0 });
+    while (!q.empty()) {
+        arbol_nodo* nodo = q.front().first;
+        int nivel = q.front().second;
+        q.pop();
+
+
+        if (nivel == nivel_objetivo && nodo != nodo_objetivo) {
+            if (padre_objetivo && (padre_objetivo->arr[0] != nodo && padre_objetivo->arr[1] != nodo)) {
+                colores[nodo] = sf::Color::Red; // Primos
+            }
+        }
+
+
+        if (nivel == nivel_objetivo - 1 && nodo != padre_objetivo) {
+            colores[nodo] = sf::Color::Yellow; // Tíos
+        }
+
+        if (nodo->arr[0]) q.push({ nodo->arr[0], nivel + 1 });
+        if (nodo->arr[1]) q.push({ nodo->arr[1], nivel + 1 });
     }
 }
 
-void CBinTree::Print()
-{
-    Levels(root);
-    std::cout << "\n";
-}
+void arbol::dibujar(sf::RenderWindow& window, arbol_nodo* node, float x, float y, float offsetX, float offsetY) {
+    if (node != nullptr) {
+        sf::CircleShape circle(25);
 
-void VecInsert(CBinTree* t, int* v, int size)
-{
-    // Función para insertar elementos en el árbol según la paridad
-    for (int i = 0; i < size; ++i)
-    {
-        bool isLeft = (v[i] % 2 != 0); // Si es impar, va a la izquierda
-        t->Insert(v[i], isLeft);
+        if (colores.find(node) != colores.end()) {
+            circle.setFillColor(colores[node]);
+        }
+        else {
+            circle.setFillColor(sf::Color::Green);
+        }
+
+      
+        circle.setPosition(x, y);
+        window.draw(circle);
+
+        sf::Font font;
+        font.loadFromFile("C:/WINDOWS/FONTS/arial.ttf");
+        sf::Text text(std::to_string(node->val), font, 20);
+        text.setFillColor(sf::Color::Black);
+        text.setPosition(x + 10, y + 10);
+        window.draw(text);
+
+        if (node->arr[0] != nullptr) {
+            sf::Vertex line[] = {
+                sf::Vertex(sf::Vector2f(x + 25, y + 25)),
+                sf::Vertex(sf::Vector2f(x - offsetX + 25, y + offsetY + 25))
+            };
+            window.draw(line, 2, sf::Lines);
+            dibujar(window, node->arr[0], x - offsetX, y + offsetY, offsetX * 0.5f, offsetY * 0.9f);
+        }
+        if (node->arr[1] != nullptr) {
+            sf::Vertex line[] = {
+                sf::Vertex(sf::Vector2f(x + 25, y + 25)),
+                sf::Vertex(sf::Vector2f(x + offsetX + 25, y + offsetY + 25))
+            };
+            window.draw(line, 2, sf::Lines);
+            dibujar(window, node->arr[1], x + offsetX, y + offsetY, offsetX * 0.5f, offsetY * 0.9f);
+        }
     }
 }
 
-int main()
-{
-    CBinTree t;
-    int v[] = { 20, 19, 18, 15, 16, 17, 14, 11, 13, 12, 9, 7, 8, 10, 6, 5, 2, 4, 3, 1 };
-    int size = sizeof(v) / sizeof(v[0]);
-    VecInsert(&t, v, size);
-    t.Print();
+void arbol::print() {
+    sf::RenderWindow window(sf::VideoMode(1000, 600), "Arbol");
+    window.setFramerateLimit(60);
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear(sf::Color(173, 216, 230));
+        if (root != nullptr)
+            dibujar(window, root, 400, 50, 200, 100);
+        window.display();
+    }
+}
+
+void arbol::VecInsert(arbol* t, int* v, int size) {
+    if (size <= 0) { return; }
+    t->push(v[size / 2]);
+    VecInsert(t, v, size / 2);
+    VecInsert(t, v + size / 2 + 1, size - size / 2 - 1);
+}
+
+int main() {
+    arbol h;
+    int numbers[30];
+    for (int i = 0; i < 30; i++) {
+        numbers[i] = i + 1;
+    }
+
+    h.VecInsert(&h, numbers, 30);
+
+    h.pintar_tios_primos(2);
+    h.print();
+
+    return 0;
 }

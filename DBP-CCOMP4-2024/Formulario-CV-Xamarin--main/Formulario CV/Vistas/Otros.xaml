@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Formulario_CV.Vistas.Otros">
+    <StackLayout>
+        <Label Text="Redes sociales:"
+               FontSize="30" />
+        <Entry Placeholder="Escribe tus redes sociales aqui"
+               x:Name="redesx" />
+        <Label Text="Educacion:"
+               FontSize="30" />
+        <Entry Placeholder="Escribe tu educacion aqui"
+               x:Name="educacionx" />
+        <Label Text="Experiencia:"
+               FontSize="30" />
+        <Entry Placeholder="Escribe tu experiencia aqui"
+               x:Name="experienciax" />
+        <Label Text="Hobbies:"
+               FontSize="30" />
+        <Entry Placeholder="Escribe tus hobbies aqui"
+               x:Name="hobbiesx" />
+        <Button Text="Enviar"
+                BackgroundColor="#80AEFF"
+                FontSize="25"
+                x:Name="btncompletado"
+                Clicked="btncompletado_Clicked" />
+    </StackLayout>
+</ContentPage>

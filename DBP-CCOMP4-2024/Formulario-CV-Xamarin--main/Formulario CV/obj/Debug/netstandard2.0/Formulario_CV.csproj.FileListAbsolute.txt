@@ -1,0 +1,41 @@
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\bin\Debug\netstandard2.0\Formulario_CV.deps.json
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\bin\Debug\netstandard2.0\Formulario_CV.dll
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\bin\Debug\netstandard2.0\Formulario_CV.pdb
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.csproj.AssemblyReference.cache
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Vistas\Principal.xaml.g.cs
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.AssemblyInfoInputs.cache
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.AssemblyInfo.cs
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.csproj.CoreCompileInputs.cache
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.dll
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\refint\Formulario_CV.dll
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.pdb
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\ref\Formulario_CV.dll
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Vistas\Datos_personales.xaml.g.cs
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Vistas\Perfil.xaml.g.cs
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Vistas\Enviar.xaml.g.cs
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Vistas\Idiomas.xaml.g.cs
+C:\Users\jarb2\Documentos\Formulario CV\Formulario CV\obj\Debug\netstandard2.0\Vistas\Otros.xaml.g.cs
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\bin\Debug\netstandard2.0\Formulario_CV.deps.json
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\bin\Debug\netstandard2.0\Formulario_CV.dll
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\bin\Debug\netstandard2.0\Formulario_CV.pdb
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.csproj.AssemblyReference.cache
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Vistas\Datos_personales.xaml.g.cs
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Vistas\Enviar.xaml.g.cs
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Vistas\Idiomas.xaml.g.cs
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Vistas\Otros.xaml.g.cs
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Vistas\Perfil.xaml.g.cs
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Vistas\Principal.xaml.g.cs
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.AssemblyInfoInputs.cache
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.AssemblyInfo.cs
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.csproj.CoreCompileInputs.cache
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.sourcelink.json
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.dll
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\refint\Formulario_CV.dll
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\Formulario_CV.pdb
+C:\Users\HP\Downloads\Formulario-CV-Xamarin--main\Formulario CV\obj\Debug\netstandard2.0\ref\Formulario_CV.dll

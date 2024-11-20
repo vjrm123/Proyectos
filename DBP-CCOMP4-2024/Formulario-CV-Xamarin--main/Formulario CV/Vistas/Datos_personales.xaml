@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Formulario_CV.Vistas.Datos_personales">
+    <StackLayout>
+        <StackLayout>
+            <Label Text="Nombre:"
+                   FontSize="30" />
+            <Entry Placeholder="Introduce tu nombre"
+                   x:Name="info_nombre" />
+        </StackLayout>
+        <StackLayout >
+            <Label Text="Edad:"
+                   FontSize="30" />
+            <Entry Placeholder="Introduce tu edad"
+                   x:Name="info_edad" />
+        </StackLayout>
+        <StackLayout>
+            <Label Text="Correo electronico:"
+                   FontSize="30" />
+            <Entry Placeholder="Introduce tu correo electronico"
+                   x:Name="info_correo" />
+        </StackLayout>
+        <StackLayout>
+            <Label Text="Telefono:"
+                   FontSize="30" />
+            <Entry Placeholder="Introduce tu telefono"
+                   x:Name="info_telefono" />
+        </StackLayout>
+        <StackLayout >
+            <Label Text="Ocupación:"
+                   FontSize="30" />
+            <Entry Placeholder="Introduce tu ocupación"
+                   x:Name="info_ocupacion" />
+        </StackLayout>
+        <StackLayout>
+            <Label Text="Direción:"
+                   FontSize="30" />
+            <Entry Placeholder="Introduce tu direción"
+                   x:Name="info_direccion" />
+            <Button Text="Siguiente"
+                    BackgroundColor="#80AEFF"
+                    FontSize="25"
+                    x:Name="btncompletado"
+                    Clicked="btncompletado_Clicked" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

@@ -5,205 +5,187 @@
 
 using namespace std;
 
-struct node {
+struct nodo {
     int valor;
-    node* nod[2];
+    nodo* hijos[2];
 
-    node(int valor) {
+    nodo(int valor) {
         this->valor = valor;
-        nod[0] = nod[1] = nullptr;
+        hijos[0] = hijos[1] = nullptr;
     }
 };
 
-class cbintree {
+class arbol_binario {
 public:
-    cbintree() : root(nullptr) {}
-    ~cbintree() { clear(root); }
+    arbol_binario() : raiz(nullptr) {}
+    ~arbol_binario() { limpiar(raiz); }
 
-    bool add(int valor);
-    void draw(sf::RenderWindow& window, sf::Font& font, sf::Vector2i mousePos);
-    node* getRoot() { return root; }
+    bool agregar(int valor);
+    void dibujar(sf::RenderWindow& ventana, sf::Font& fuente, sf::Vector2i posicionMouse);
+    nodo* obtenerRaiz() { return raiz; }
 
 private:
-    node* root;
+    nodo* raiz;
 
-    void clear(node* p);
-    void calculatePositions(node* p, int x, int y, int horizontalOffset, map<node*, pair<int, int>>& positions);
-    void findLeftmostRightmost(node* p, int depth, map<int, node*>& leftmost, map<int, node*>& rightmost);
-    void drawNodeWithColor(sf::RenderWindow& window, node* nodePtr, sf::Font& font, int xPos, int yPos, bool isContour);
-    void drawEdges(sf::RenderWindow& window, node* nodePtr, const map<node*, pair<int, int>>& positions);
-    void drawTree(sf::RenderWindow& window, node* p, sf::Font& font, map<node*, pair<int, int>>& positions);
+    void limpiar(nodo* p);
+    void calcularPosiciones(nodo* p, int x, int y, int desplazamientoHorizontal, map<nodo*, pair<int, int>>& posiciones);
+    void encontrarExtremos(nodo* p, int profundidad, map<int, nodo*>& masIzquierdo, map<int, nodo*>& masDerecho);
+    void dibujarNodoConColor(sf::RenderWindow& ventana, nodo* nodoPtr, sf::Font& fuente, int xPos, int yPos, bool esContorno);
+    void dibujarConexiones(sf::RenderWindow& ventana, nodo* nodoPtr, const map<nodo*, pair<int, int>>& posiciones);
+    void dibujarArbol(sf::RenderWindow& ventana, nodo* p, sf::Font& fuente, map<nodo*, pair<int, int>>& posiciones);
 };
 
-// Agregar un nodo al árbol
-bool cbintree::add(int valor) {
-    node** p = &root;
+bool arbol_binario::agregar(int valor) {
+    nodo** p = &raiz;
     while (*p != nullptr) {
         if ((*p)->valor == valor) return false;
-        p = &((*p)->nod[(*p)->valor < valor]);
+        p = &((*p)->hijos[(*p)->valor < valor]);
     }
-    *p = new node(valor);
+    *p = new nodo(valor);
     return true;
 }
 
-// Limpiar el árbol
-void cbintree::clear(node* p) {
+void arbol_binario::limpiar(nodo* p) {
     if (!p) return;
-    clear(p->nod[0]);
-    clear(p->nod[1]);
+    limpiar(p->hijos[0]);
+    limpiar(p->hijos[1]);
     delete p;
 }
 
-// Calcular las posiciones de cada nodo
-void cbintree::calculatePositions(node* p, int x, int y, int horizontalOffset, map<node*, pair<int, int>>& positions) {
+void arbol_binario::calcularPosiciones(nodo* p, int x, int y, int desplazamientoHorizontal, map<nodo*, pair<int, int>>& posiciones) {
     if (!p) return;
-    positions[p] = make_pair(x, y);
-    calculatePositions(p->nod[0], x - horizontalOffset, y + 80, horizontalOffset / 2, positions);
-    calculatePositions(p->nod[1], x + horizontalOffset, y + 80, horizontalOffset / 2, positions);
+    posiciones[p] = make_pair(x, y);
+    calcularPosiciones(p->hijos[0], x - desplazamientoHorizontal, y + 80, desplazamientoHorizontal / 2, posiciones);
+    calcularPosiciones(p->hijos[1], x + desplazamientoHorizontal, y + 80, desplazamientoHorizontal / 2, posiciones);
 }
 
-// Encontrar nodos más a la izquierda y derecha por nivel
-void cbintree::findLeftmostRightmost(node* p, int depth, map<int, node*>& leftmost, map<int, node*>& rightmost) {
+void arbol_binario::encontrarExtremos(nodo* p, int profundidad, map<int, nodo*>& masIzquierdo, map<int, nodo*>& masDerecho) {
     if (!p) return;
 
-    // Nodo más a la izquierda
-    if (leftmost.find(depth) == leftmost.end()) {
-        leftmost[depth] = p;
+    if (masIzquierdo.find(profundidad) == masIzquierdo.end()) {
+        masIzquierdo[profundidad] = p;
     }
 
-    // Nodo más a la derecha
-    rightmost[depth] = p;
+    masDerecho[profundidad] = p;
 
-    findLeftmostRightmost(p->nod[0], depth + 1, leftmost, rightmost);
-    findLeftmostRightmost(p->nod[1], depth + 1, leftmost, rightmost);
+    encontrarExtremos(p->hijos[0], profundidad + 1, masIzquierdo, masDerecho);
+    encontrarExtremos(p->hijos[1], profundidad + 1, masIzquierdo, masDerecho);
 }
 
-// Dibuja el nodo con el color adecuado
-void cbintree::drawNodeWithColor(sf::RenderWindow& window, node* nodePtr, sf::Font& font, int xPos, int yPos, bool isContour) {
-    sf::CircleShape circle(20);
+void arbol_binario::dibujarNodoConColor(sf::RenderWindow& ventana, nodo* nodoPtr, sf::Font& fuente, int xPos, int yPos, bool esContorno) {
+    sf::CircleShape circulo(20);
 
-    // Color según si es contorno o no
-    if (isContour) {
-        circle.setFillColor(sf::Color::Yellow); // Nodos de contorno
+    if (esContorno) {
+        circulo.setFillColor(sf::Color::Yellow); 
     }
     else {
-        circle.setFillColor(sf::Color::Green);  // Nodos internos
+        circulo.setFillColor(sf::Color::Green);  
     }
 
-    circle.setPosition(xPos, yPos);
-    window.draw(circle);
+    circulo.setPosition(xPos, yPos);
+    ventana.draw(circulo);
 
-    // Texto del valor del nodo
-    sf::Text text;
-    text.setFont(font);
-    text.setString(to_string(nodePtr->valor));
-    text.setCharacterSize(25);
-    text.setFillColor(sf::Color::Black);
+    sf::Text texto;
+    texto.setFont(fuente);
+    texto.setString(to_string(nodoPtr->valor));
+    texto.setCharacterSize(25);
+    texto.setFillColor(sf::Color::Black);
 
-    sf::FloatRect textRect = text.getLocalBounds();
-    text.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-    text.setPosition(xPos + 20, yPos + 20);
-    window.draw(text);
+    sf::FloatRect rectTexto = texto.getLocalBounds();
+    texto.setOrigin(rectTexto.left + rectTexto.width / 2.0f, rectTexto.top + rectTexto.height / 2.0f);
+    texto.setPosition(xPos + 20, yPos + 20);
+    ventana.draw(texto);
 }
 
-// Dibuja las conexiones entre nodos
-void cbintree::drawEdges(sf::RenderWindow& window, node* nodePtr, const map<node*, pair<int, int>>& positions) {
-    if (nodePtr->nod[0] != nullptr) {
-        sf::Vertex line[] = {
-            sf::Vertex(sf::Vector2f(positions.at(nodePtr).first + 20, positions.at(nodePtr).second + 20)),
-            sf::Vertex(sf::Vector2f(positions.at(nodePtr->nod[0]).first + 20, positions.at(nodePtr->nod[0]).second + 20))
+void arbol_binario::dibujarConexiones(sf::RenderWindow& ventana, nodo* nodoPtr, const map<nodo*, pair<int, int>>& posiciones) {
+    if (nodoPtr->hijos[0] != nullptr) {
+        sf::Vertex linea[] = {
+            sf::Vertex(sf::Vector2f(posiciones.at(nodoPtr).first + 20, posiciones.at(nodoPtr).second + 20)),
+            sf::Vertex(sf::Vector2f(posiciones.at(nodoPtr->hijos[0]).first + 20, posiciones.at(nodoPtr->hijos[0]).second + 20))
         };
-        window.draw(line, 2, sf::Lines);
+        ventana.draw(linea, 2, sf::Lines);
     }
-    if (nodePtr->nod[1] != nullptr) {
-        sf::Vertex line[] = {
-            sf::Vertex(sf::Vector2f(positions.at(nodePtr).first + 20, positions.at(nodePtr).second + 20)),
-            sf::Vertex(sf::Vector2f(positions.at(nodePtr->nod[1]).first + 20, positions.at(nodePtr->nod[1]).second + 20))
+    if (nodoPtr->hijos[1] != nullptr) {
+        sf::Vertex linea[] = {
+            sf::Vertex(sf::Vector2f(posiciones.at(nodoPtr).first + 20, posiciones.at(nodoPtr).second + 20)),
+            sf::Vertex(sf::Vector2f(posiciones.at(nodoPtr->hijos[1]).first + 20, posiciones.at(nodoPtr->hijos[1]).second + 20))
         };
-        window.draw(line, 2, sf::Lines);
+        ventana.draw(linea, 2, sf::Lines);
     }
 }
 
-// Dibujar todo el árbol
-void cbintree::drawTree(sf::RenderWindow& window, node* p, sf::Font& font, map<node*, pair<int, int>>& positions) {
-    map<int, node*> leftmost;
-    map<int, node*> rightmost;
+void arbol_binario::dibujarArbol(sf::RenderWindow& ventana, nodo* p, sf::Font& fuente, map<nodo*, pair<int, int>>& posiciones) {
+    map<int, nodo*> masIzquierdo;
+    map<int, nodo*> masDerecho;
 
-    findLeftmostRightmost(p, 0, leftmost, rightmost);
+    encontrarExtremos(p, 0, masIzquierdo, masDerecho);
 
-    // Dibujar las conexiones entre nodos
-    for (auto& it : positions) {
-        drawEdges(window, it.first, positions);
+    for (auto& it : posiciones) {
+        dibujarConexiones(ventana, it.first, posiciones);
     }
 
-    // Dibujar los nodos
-    for (auto& it : positions) {
-        node* currentNode = it.first;
+    for (auto& it : posiciones) {
+        nodo* nodoActual = it.first;
         int xPos = it.second.first;
         int yPos = it.second.second;
 
-        // Verificar si el nodo está en los contornos o es una hoja
-        bool isContour = (leftmost[it.second.second / 80] == currentNode ||
-            rightmost[it.second.second / 80] == currentNode ||
-            (currentNode->nod[0] == nullptr && currentNode->nod[1] == nullptr));
+        bool esContorno = (masIzquierdo[it.second.second / 80] == nodoActual ||
+            masDerecho[it.second.second / 80] == nodoActual ||
+            (nodoActual->hijos[0] == nullptr && nodoActual->hijos[1] == nullptr));
 
-        drawNodeWithColor(window, currentNode, font, xPos, yPos, isContour);
+        dibujarNodoConColor(ventana, nodoActual, fuente, xPos, yPos, esContorno);
     }
 }
 
-// Función principal de dibujo
-void cbintree::draw(sf::RenderWindow& window, sf::Font& font, sf::Vector2i mousePos) {
-    if (root == nullptr) return;
+void arbol_binario::dibujar(sf::RenderWindow& ventana, sf::Font& fuente, sf::Vector2i posicionMouse) {
+    if (raiz == nullptr) return;
 
-    map<node*, pair<int, int>> positions;
-    calculatePositions(root, 400, 50, 200, positions);
-    drawTree(window, root, font, positions);
+    map<nodo*, pair<int, int>> posiciones;
+    calcularPosiciones(raiz, 400, 50, 200, posiciones);
+    dibujarArbol(ventana, raiz, fuente, posiciones);
 }
 
-// Main para probar
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Visualización de Árbol Binario");
-    sf::Font font;
+    sf::RenderWindow ventana(sf::VideoMode(800, 600), "Visualización de Árbol Binario");
+    sf::Font fuente;
 
-    if (!font.loadFromFile("Mayan.ttf")) {
+    if (!fuente.loadFromFile("Mayan.ttf")) {
         cerr << "Error cargando la fuente" << endl;
         return -1;
     }
 
-    cbintree tree;
+    arbol_binario arbol;
 
-    // Agregar más nodos
-    tree.add(8);
-    tree.add(4);
-    tree.add(2);
-    tree.add(1);
-    tree.add(6);
-    tree.add(3);
-    tree.add(5);
-    tree.add(7);
-    tree.add(12);
-    tree.add(14);
-    tree.add(10);
-    tree.add(9);
-    tree.add(11);
-    tree.add(13);
-    tree.add(15);
+    arbol.agregar(8);
+    arbol.agregar(4);
+    arbol.agregar(2);
+    arbol.agregar(1);
+    arbol.agregar(6);
+    arbol.agregar(3);
+    arbol.agregar(5);
+    arbol.agregar(7);
+    arbol.agregar(12);
+    arbol.agregar(14);
+    arbol.agregar(10);
+    arbol.agregar(9);
+    arbol.agregar(11);
+    arbol.agregar(13);
+    arbol.agregar(15);
 
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
+    while (ventana.isOpen()) {
+        sf::Event evento;
+        while (ventana.pollEvent(evento)) {
+            if (evento.type == sf::Event::Closed)
+                ventana.close();
         }
 
-        window.clear(sf::Color(173, 216, 230));
-        sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+        ventana.clear(sf::Color(173, 216, 230));
+        sf::Vector2i posicionMouse = sf::Mouse::getPosition(ventana);
 
-        tree.draw(window, font, mousePos);
+        arbol.dibujar(ventana, fuente, posicionMouse);
 
-        window.display();
+        ventana.display();
     }
 
     return 0;
 }
-
