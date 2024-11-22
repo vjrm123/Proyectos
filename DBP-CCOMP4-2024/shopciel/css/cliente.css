@@ -1,0 +1,112 @@
+:root{
+    --despues-shadow: inset 3px 3px 3px #bababa, inset -3px -3px 3px #ffffff,
+    -1px -1px 0.5px rgba(255,255,255,1),
+    1px 1px 0.5px rgba(0,0,0,0.15),
+    0px 12px 10px -10px rgba(0,0,0,0.05);
+    --main-color: #1775F1;
+    --box-shadow: 2px 2px 5px rgba(0,0,0,0.40);
+    --blue: #1775F1;
+	--light-blue: #D0E4FF;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    margin: 0;
+    background: #F1F0F6;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+section {
+    max-width: 500px;
+    width: 100%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    margin: 20px;
+}
+h2 {
+    text-align: center;
+    color: #1775F1;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+.btn{
+    background-color:white;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.40);
+    box-shadow: var(--box-shadow);
+    text-transform: capitalize;
+    color: var(--main-color);
+    border-radius: 1.5rem;
+    font-size: 15px;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    margin-top: 16px;
+    font-weight: bold;
+}
+select{
+    padding: 8px;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    background:  #F1F0F6;
+}
+section form input {
+    padding: 8px;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    background:  #F1F0F6;
+}
+input[type='submit']:hover{
+    box-shadow: var(--despues-shadow);
+    border: 1px solid rgba(0,0,0,0.1);
+    transform: translateY(0.5em);
+    color: #fc1717;
+    transition: 0.5s;
+}
+.texto-negro{
+    color: black !important;
+}
+
+#formulario2 p{
+    margin-top: 15px !important;
+    font-size: 1.1rem;
+    color: var(--main-color);
+    margin: 4px;
+    font-weight: bold;
+}
+#formulario p{
+    margin-top: 15px !important;
+    font-size: 1.1rem;
+    color: var(--main-color);
+    margin: 4px;
+    font-weight: bold;
+}
+
+form input:focus {
+	box-shadow: 0 0 0 1px var(--blue), 0 0 0 3px var(--light-blue);
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    width: 100%;
+}
